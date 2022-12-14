@@ -1,4 +1,4 @@
-package com.venture.adminModule.model;
+package com.venture.model.admin;
 
 import java.time.LocalDateTime;
 

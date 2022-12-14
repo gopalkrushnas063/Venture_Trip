@@ -1,4 +1,4 @@
-package com.venture.loginModule.model;
+package com.venture.model.user;
 
 public class Customer {
     private Integer customerID;

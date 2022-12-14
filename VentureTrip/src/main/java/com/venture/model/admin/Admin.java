@@ -1,4 +1,4 @@
-package com.venture.adminModule.model;
+package com.venture.model.admin;
 
 
 import lombok.AllArgsConstructor;
@@ -23,6 +23,6 @@ public class Admin {
     private String adminName;
     private String password;
     private String email;
-    private String phoneNumber;
+    private String mobile;
 
 }

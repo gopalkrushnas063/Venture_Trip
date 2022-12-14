@@ -1,4 +1,4 @@
-package com.venture.adminModule.model;
+package com.venture.model.admin;
 
 public class Vehicles {
     private Integer vehicleNumber;

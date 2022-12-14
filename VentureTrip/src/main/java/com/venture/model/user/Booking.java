@@ -1,4 +1,4 @@
-package com.venture.userModule.model;
+package com.venture.model.user;
 
 import java.time.LocalDateTime;
 
