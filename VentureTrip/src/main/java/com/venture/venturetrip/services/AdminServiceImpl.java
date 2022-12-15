@@ -8,12 +8,18 @@ import org.springframework.stereotype.Service;
 
 import com.venture.venturetrip.exception.AdminException;
 import com.venture.venturetrip.exception.HotelException;
+import com.venture.venturetrip.exception.TravelsException;
+import com.venture.venturetrip.exception.VehiclesException;
 import com.venture.venturetrip.model.admin.Admin;
 import com.venture.venturetrip.model.admin.AdminSignInDTO;
 import com.venture.venturetrip.model.admin.Hotel;
+import com.venture.venturetrip.model.admin.Travels;
+import com.venture.venturetrip.model.admin.Vehicles;
 import com.venture.venturetrip.repository.AdminDao;
 import com.venture.venturetrip.repository.AdminSessionDAO;
 import com.venture.venturetrip.repository.HotelDao;
+import com.venture.venturetrip.repository.TravelsDao;
+import com.venture.venturetrip.repository.VehiclesDao;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -25,6 +31,12 @@ public class AdminServiceImpl implements AdminService{
     
     @Autowired
     private HotelDao hotelDao;
+    
+    @Autowired
+    private TravelsDao travelsdao;
+    
+    @Autowired
+    private VehiclesDao vehiclesDao;
     
     @Override
     public Admin createAdmin(AdminSignInDTO adminsiginDto) throws AdminException {
@@ -92,6 +104,37 @@ public class AdminServiceImpl implements AdminService{
 		}else {
 			return hotels;
 		}
+	}
+
+
+	@Override
+	public Travels addNewTravelsDetails(Travels travels) throws TravelsException {
+		
+		  return travelsdao.save(travels);
+		  
+	
+	}
+
+
+	@Override
+	public Vehicles addNewVehiclesDetials(Vehicles vehicles, Integer travelsID) throws TravelsException, VehiclesException {
+		
+		  Optional<Travels> opt = travelsdao.findById(travelsID);
+		  
+		  if(opt.isPresent()) {
+			  
+			  Travels travels = opt.get();
+			   
+			  travels.getVehicles().add(vehicles);
+			    
+			  travelsdao.save(travels);
+			  
+			return  vehiclesDao.save(vehicles);
+			  
+		  }else {
+			  throw new TravelsException("Travels Not found with TravelsID :"+travelsID); 
+		  }
+		
 	}
 	
 	

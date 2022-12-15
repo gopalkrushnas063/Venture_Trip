@@ -15,6 +15,24 @@ public class GlobalExceptionHandler {
         MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
         return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
     }
+    
+    @ExceptionHandler(HotelException.class)
+    public ResponseEntity<MyErrorDetails> HotelExceptionHandler(HotelException exp, WebRequest req) {
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler(TravelsException.class)
+    public ResponseEntity<MyErrorDetails> TravelsExceptionHandler(TravelsException exp, WebRequest req) {
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler(VehiclesException.class)
+    public ResponseEntity<MyErrorDetails> VehiclesExceptionHandler(VehiclesException exp, WebRequest req) {
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<MyErrorDetails> IllegalArgumentExceptionHandler(IllegalArgumentException exp,
