@@ -28,4 +28,6 @@ public interface AdminService {
     
     public Vehicles addNewVehiclesDetials(Vehicles vehicles, Integer travelsID) throws TravelsException, VehiclesException;
     
+    
+    
 }
