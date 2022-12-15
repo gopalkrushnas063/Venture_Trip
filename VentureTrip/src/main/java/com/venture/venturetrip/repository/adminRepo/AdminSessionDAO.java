@@ -1,4 +1,4 @@
-package com.venture.venturetrip.repository;
+package com.venture.venturetrip.repository.adminRepo;
 
 import com.venture.venturetrip.model.admin.CurrentAdminSession;
 import org.springframework.data.jpa.repository.JpaRepository;

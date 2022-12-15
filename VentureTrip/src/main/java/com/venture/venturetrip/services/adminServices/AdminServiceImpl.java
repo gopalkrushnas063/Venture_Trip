@@ -1,10 +1,10 @@
-package com.venture.venturetrip.services;
+package com.venture.venturetrip.services.adminServices;
 
 import com.venture.venturetrip.exception.AdminException;
 import com.venture.venturetrip.model.admin.Admin;
 import com.venture.venturetrip.model.admin.AdminSignInDTO;
-import com.venture.venturetrip.repository.AdminDao;
-import com.venture.venturetrip.repository.AdminSessionDAO;
+import com.venture.venturetrip.repository.adminRepo.AdminDao;
+import com.venture.venturetrip.repository.adminRepo.AdminSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,4 +32,9 @@ public class AdminServiceImpl implements AdminService{
             return adminDao.save(admin);
         }
     }
+
+
+
+
+
 }
