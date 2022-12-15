@@ -1,16 +1,14 @@
 package com.venture.venturetrip.exception;
 
-public class TravelsException extends RuntimeException {
+public class VehiclesException extends RuntimeException {
 	
-	public TravelsException(String message) {
+	public VehiclesException(String message) {
 		// TODO Auto-generated constructor stub
+		
 		super(message);
 	}
-	
-	
-	public TravelsException() {
+
+	public VehiclesException() {
 		// TODO Auto-generated constructor stub
 	}
-	
-
 }
