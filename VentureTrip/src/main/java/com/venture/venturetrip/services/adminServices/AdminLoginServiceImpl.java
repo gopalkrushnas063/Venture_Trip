@@ -4,8 +4,8 @@ import com.venture.venturetrip.exception.LoginException;
 import com.venture.venturetrip.model.admin.Admin;
 import com.venture.venturetrip.model.admin.AdminDTO;
 import com.venture.venturetrip.model.admin.CurrentAdminSession;
-import com.venture.venturetrip.repository.adminRepo.AdminDao;
-import com.venture.venturetrip.repository.adminRepo.AdminSessionDAO;
+import com.venture.venturetrip.repository.AdminDao;
+import com.venture.venturetrip.repository.AdminSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

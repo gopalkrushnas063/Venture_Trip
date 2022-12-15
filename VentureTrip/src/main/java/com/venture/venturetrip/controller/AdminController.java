@@ -24,7 +24,7 @@ import com.venture.venturetrip.model.admin.AdminSignInDTO;
 import com.venture.venturetrip.model.admin.Hotel;
 import com.venture.venturetrip.model.admin.Travels;
 import com.venture.venturetrip.model.admin.Vehicles;
-import com.venture.venturetrip.services.AdminService;
+import com.venture.venturetrip.services.adminServices.AdminService;
 
 @RestController
 @RequestMapping("/admin")

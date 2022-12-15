@@ -21,7 +21,49 @@ public class GlobalExceptionHandler {
         MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
         return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
     }
-    
+
+    @ExceptionHandler(CustomerException.class)
+    public ResponseEntity<MyErrorDetails> HotelExceptionHandler(CustomerException exp, WebRequest req) {
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BookingException.class)
+    public ResponseEntity<MyErrorDetails> HotelExceptionHandler(BookingException exp, WebRequest req) {
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<MyErrorDetails> HotelExceptionHandler(RuntimeException exp, WebRequest req) {
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(PackageException.class)
+    public ResponseEntity<MyErrorDetails> HotelExceptionHandler(PackageException exp, WebRequest req) {
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RouteException.class)
+    public ResponseEntity<MyErrorDetails> HotelExceptionHandler(RouteException exp, WebRequest req) {
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ReportException.class)
+    public ResponseEntity<MyErrorDetails> HotelExceptionHandler(ReportException exp, WebRequest req) {
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(TicketException.class)
+    public ResponseEntity<MyErrorDetails> HotelExceptionHandler(TicketException exp, WebRequest req) {
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(TravelsException.class)
     public ResponseEntity<MyErrorDetails> TravelsExceptionHandler(TravelsException exp, WebRequest req) {
         MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
