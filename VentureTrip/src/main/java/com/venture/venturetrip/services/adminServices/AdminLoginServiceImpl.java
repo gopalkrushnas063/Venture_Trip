@@ -67,4 +67,11 @@ public class AdminLoginServiceImpl implements AdminLoginService{
         if(opt.isPresent()) return true;
         else throw new LoginException("LogIn first!!!");
     }
+
+    @Override
+    public boolean isLoggedInByUUID(String uuid) throws LoginException {
+        Optional<CurrentAdminSession> opt = adminSessionDAO.findByUuid(uuid);
+        if(opt.isPresent()) return true;
+        else throw new LoginException("LogIn first!!!");
+    }
 }
