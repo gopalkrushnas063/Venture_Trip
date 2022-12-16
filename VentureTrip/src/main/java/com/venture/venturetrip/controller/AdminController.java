@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.venture.venturetrip.model.admin.*;
+import com.venture.venturetrip.repository.TravelsDao;
+import com.venture.venturetrip.services.adminServices.AdminLoginService;
+import com.venture.venturetrip.services.adminServices.RouteServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,25 +23,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.venture.venturetrip.exception.AdminException;
-import com.venture.venturetrip.model.admin.Admin;
-import com.venture.venturetrip.model.admin.AdminSignInDTO;
-import com.venture.venturetrip.model.admin.Hotel;
-import com.venture.venturetrip.model.admin.Travels;
-import com.venture.venturetrip.model.admin.Vehicles;
 import com.venture.venturetrip.services.adminServices.AdminService;
 
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
     @Autowired AdminService adminService;
+    @Autowired AdminLoginService adminLoginService;
+    @Autowired RouteServices routeServices;
+
+
+
 
 
     @CrossOrigin
     @PostMapping("/")
     public ResponseEntity<Admin> saveAdmin(@Valid @RequestBody AdminSignInDTO admin) throws AdminException {
-        return new ResponseEntity<Admin>(adminService.createAdmin(admin), HttpStatus.OK);
+        return new ResponseEntity<Admin>(adminService.createAdmin(admin), HttpStatus.ACCEPTED);
     }
-    
+    // to update admin by passing key
+    @CrossOrigin
+    @PutMapping("/update")
+    public ResponseEntity<Admin> updateAdmin(@RequestBody AdminSignInDTO admin, @RequestParam(required = false) String key) throws AdminException {
+        adminLoginService.isLoggedInByUUID(key);
+        return new ResponseEntity<Admin>(adminService.updateAdmin(admin, key),HttpStatus.ACCEPTED);
+    }
     
     @PostMapping("/hotels")
     public ResponseEntity<Hotel> addNewHotelHandler(@RequestBody Hotel hotel){
@@ -83,11 +93,56 @@ public class AdminController {
     }
     
     @PostMapping("/vehicles")
-    public ResponseEntity<Vehicles> addNewVehicleHandler(@RequestBody Vehicles vehicle, @RequestParam("TravelsID") Integer travelsID){
+    public ResponseEntity<Vehicles> addNewVehicleHandler(@RequestBody Vehicles vehicle){
     	
-    	Vehicles returnedTravels = adminService.addNewVehiclesDetials(vehicle, travelsID);
+    	Vehicles returnedTravels = adminService.addNewVehiclesDetails(vehicle);
     	
     	return new ResponseEntity<Vehicles>(returnedTravels, HttpStatus.ACCEPTED);
+    }
+
+
+
+    @CrossOrigin
+    @PostMapping("/routes")
+    public ResponseEntity<Route> addRoute(@RequestBody Route route){
+
+        Route route2 = routeServices.addRoute(route);
+        return new ResponseEntity<Route>(route2,HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/routes")
+    public ResponseEntity<Route> updateRoute(@RequestBody Route route){
+        Route updatedRoute = routeServices.updateRoute(route);
+        return new ResponseEntity<Route>(updatedRoute,HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/travels")
+    public ResponseEntity<Travels> updateTravellers(@RequestBody Travels travels){
+        Travels updatedTravel =  adminService.updateTravelDetails(travels);
+
+        return new ResponseEntity<Travels>(updatedTravel,HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/vehicle")
+    public ResponseEntity<Vehicles> updateVehicles(@RequestBody Vehicles vehicles){
+        Vehicles updatedVehicles =  adminService.updateVehicleDetails(vehicles);
+
+        return new ResponseEntity<Vehicles>(updatedVehicles,HttpStatus.ACCEPTED);
+    }
+
+
+
+    @DeleteMapping("/travels/{travellerID}")
+    public ResponseEntity<Travels> removeTravellerHandler(@PathVariable("travellerID") Integer travelerID){
+        Travels travels = adminService.removeTravel(travelerID);
+        return new ResponseEntity<Travels>(travels,HttpStatus.OK);
+    }
+
+
+    @DeleteMapping("/route/{routeID}")
+    public ResponseEntity<Route> removeRouteHandler(@PathVariable("routeID") Integer routeID){
+        Route route = routeServices.deleteRoute(routeID);
+        return new ResponseEntity<Route>(route,HttpStatus.OK);
     }
     
 }

@@ -32,5 +32,6 @@ public class Travels {
     private String contact;
     
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Vehicles> vehicles = new ArrayList<>();
+    private List<Route> routes = new ArrayList<>();
+
 }

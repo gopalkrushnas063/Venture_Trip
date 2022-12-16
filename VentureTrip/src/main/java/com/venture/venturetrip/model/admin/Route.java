@@ -1,13 +1,22 @@
 package com.venture.venturetrip.model.admin;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Route {
     @Id
-    private String routeID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer routeID;
     private String routeFrom;
     private String routeTo;
     private LocalDateTime departureTime;
@@ -15,5 +24,10 @@ public class Route {
     private LocalDateTime doj;
     private String pickupPoint;
     private Double fare;
+    private Integer travelsID;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Vehicles vehicles;
 
 }
