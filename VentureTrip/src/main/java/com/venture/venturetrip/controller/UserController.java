@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.venture.venturetrip.exception.CustomerException;
 import com.venture.venturetrip.model.admin.Travels;
 import com.venture.venturetrip.model.user.Customer;
+import com.venture.venturetrip.model.user.FeedBack;
 import com.venture.venturetrip.model.user.Ticket;
 import com.venture.venturetrip.services.userServices.UserService;
 
@@ -97,6 +100,42 @@ public class UserController {
 		 
 		 
 	 }
+    
+    
+
+	@PostMapping("/FeedBack")
+	ResponseEntity<FeedBack> giveFeedBack(@RequestBody FeedBack feedback){
+		
+		FeedBack fb = cService.addFeedback(feedback);
+		
+		return new ResponseEntity<FeedBack>(fb,HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/FeedBack/{Id}")
+	ResponseEntity<FeedBack> virewFeedBack(@PathVariable("Id") Integer feedbackID ,@RequestBody FeedBack feedback){
+		
+		FeedBack fb = cService.viewFeedBack(feedbackID);
+		
+		return new ResponseEntity<FeedBack>(fb,HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateFeedback/{Id}")
+	ResponseEntity<FeedBack> updateFeedBack(@PathVariable("Id") Integer feedbackID, @RequestBody FeedBack feedback){
+		
+		FeedBack fb = cService.updateFeedBack(feedback);
+		
+		return new ResponseEntity<FeedBack>(fb,HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/deleteFeedback/{Id}")
+	ResponseEntity<FeedBack> deleteFeedBack(@PathVariable("Id") Integer feedbackID, @RequestBody FeedBack feedback){
+		
+		FeedBack fb = cService.deleteFeedBack(feedback);
+		
+		return new ResponseEntity<FeedBack>(fb,HttpStatus.ACCEPTED);
+	}
+    
+    
 	
 
 	
