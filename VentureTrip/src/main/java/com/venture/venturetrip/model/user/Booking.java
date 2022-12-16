@@ -1,17 +1,36 @@
 package com.venture.venturetrip.model.user;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Booking {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer bookingID;
-    private LocalDateTime bookingDate;
+    private String name;
+    private String address;
+    private String mobileNo;
+    private LocalDate bookingDate;
     private Integer packageID;
-    private Integer travelsID;
-    private Integer vehicleID;
-    private Integer routeID;
+    private Integer amount;
+    private LocalDate DateofJourney;
+    
+ 
 
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.venture.venturetrip.exception.CustomerException;
 import com.venture.venturetrip.model.admin.Travels;
+import com.venture.venturetrip.model.user.Booking;
 import com.venture.venturetrip.model.user.Customer;
 import com.venture.venturetrip.model.user.FeedBack;
 import com.venture.venturetrip.model.user.Ticket;
@@ -81,15 +82,7 @@ public class UserController {
 
 	}
 	
-	 @GetMapping("/ticket/{tid}")
-	 public ResponseEntity<Ticket>  getTicketById(@PathVariable("tid") Integer tid) throws CustomerException{
-		 
-		 Ticket t = cService.getTicketById(tid);
 
-			return new ResponseEntity<Ticket>  (t, HttpStatus.OK);
-		 
-		 
-	 }
 	 
     @GetMapping("/ticketwithbid/{bid}")
 	 public ResponseEntity<Ticket>  getTicketByBookingId(@PathVariable("bid") Integer bid) throws CustomerException{
@@ -135,8 +128,14 @@ public class UserController {
 		return new ResponseEntity<FeedBack>(fb,HttpStatus.ACCEPTED);
 	}
     
-    
-	
+    @PostMapping("/booking")
+	 ResponseEntity<String> bookNewTicketHandler(@RequestBody Booking booking){
+    	
+    	String ticketID = cService.bookNewTicket(booking);
+    	
+    	return new ResponseEntity<String>(ticketID,HttpStatus.ACCEPTED);
+		
+	}
 
 	
 

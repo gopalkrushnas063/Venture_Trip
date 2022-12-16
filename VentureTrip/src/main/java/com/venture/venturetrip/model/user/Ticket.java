@@ -1,47 +1,30 @@
 package com.venture.venturetrip.model.user;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.time.LocalDate;
 
-@Entity
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ticket {
-    @Id
+   
     private Integer ticketID;
+    private String name;
+    private String address;
+    private String mobileNo;
     private String status;
-    private Integer bookingID;
-	public Ticket() {
-		super();
-	}
-	public Ticket(Integer ticketID, String status, Integer bookingID) {
-		super();
-		this.ticketID = ticketID;
-		this.status = status;
-		this.bookingID = bookingID;
-	}
-	public Integer getTicketID() {
-		return ticketID;
-	}
-	public void setTicketID(Integer ticketID) {
-		this.ticketID = ticketID;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public Integer getBookingID() {
-		return bookingID;
-	}
-	public void setBookingID(Integer bookingID) {
-		this.bookingID = bookingID;
-	}
-	@Override
-	public String toString() {
-		return "Ticket [ticketID=" + ticketID + ", status=" + status + ", bookingID=" + bookingID + "]";
-	}
-    
-    
-    
+    private String From;
+    private String To;
+    private Integer ticketCost;
+    private LocalDate DateofJourney;
+   
 
 }

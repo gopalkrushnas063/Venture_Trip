@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -31,7 +33,10 @@ public class Travels {
     private String address;
     private String contact;
     
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     private List<Route> routes = new ArrayList<>();
+    
+   
 
 }

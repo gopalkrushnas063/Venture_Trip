@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,6 +30,7 @@ public class Route {
     private Integer travelsID;
 
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private Vehicles vehicles;
 

@@ -4,10 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.venture.venturetrip.model.admin.*;
-import com.venture.venturetrip.repository.TravelsDao;
-import com.venture.venturetrip.services.adminServices.AdminLoginService;
-import com.venture.venturetrip.services.adminServices.RouteServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +19,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.venture.venturetrip.exception.AdminException;
+import com.venture.venturetrip.model.admin.Admin;
+import com.venture.venturetrip.model.admin.AdminSignInDTO;
+import com.venture.venturetrip.model.admin.Hotel;
+import com.venture.venturetrip.model.admin.Package;
+import com.venture.venturetrip.model.admin.Route;
+import com.venture.venturetrip.model.admin.Travels;
+import com.venture.venturetrip.model.admin.Vehicles;
+import com.venture.venturetrip.model.user.PackageDTO;
+import com.venture.venturetrip.services.adminServices.AdminLoginService;
 import com.venture.venturetrip.services.adminServices.AdminService;
+import com.venture.venturetrip.services.adminServices.RouteServices;
 
 @RestController
 @RequestMapping("/admin")
@@ -145,4 +151,19 @@ public class AdminController {
         return new ResponseEntity<Route>(route,HttpStatus.OK);
     }
     
+    @PostMapping("/package")
+    public ResponseEntity<Package> addNewPackageHandler(@RequestBody Package package1, @RequestParam("travelsID") Integer travelsID,@RequestParam("routeID") Integer routeID, @RequestParam("hotelID") Integer hotelID){
+    	
+    	Package returnedPackage = adminService.addNewPackageDetails(package1,travelsID,routeID,hotelID);
+    	
+    	return new ResponseEntity<Package>(returnedPackage,HttpStatus.ACCEPTED);
+    }
+    
+    @GetMapping("/packages")
+    public ResponseEntity<List<PackageDTO>> getAllPackageHandler(@RequestParam("from") String from, @RequestParam("to") String to){
+    	
+    	List<PackageDTO> packagesDTOs = adminService.getAllPackageDetails(from, to);
+    	
+    	return new ResponseEntity<>(packagesDTOs,HttpStatus.OK);
+    }
 }

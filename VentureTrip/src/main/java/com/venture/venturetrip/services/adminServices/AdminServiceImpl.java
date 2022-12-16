@@ -1,13 +1,34 @@
 package com.venture.venturetrip.services.adminServices;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.venture.venturetrip.exception.*;
-import com.venture.venturetrip.model.admin.*;
-import com.venture.venturetrip.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.venture.venturetrip.exception.AdminException;
+import com.venture.venturetrip.exception.HotelException;
+import com.venture.venturetrip.exception.PackageException;
+import com.venture.venturetrip.exception.RouteException;
+import com.venture.venturetrip.exception.TravelsException;
+import com.venture.venturetrip.exception.VehiclesException;
+import com.venture.venturetrip.model.admin.Admin;
+import com.venture.venturetrip.model.admin.AdminSignInDTO;
+import com.venture.venturetrip.model.admin.CurrentAdminSession;
+import com.venture.venturetrip.model.admin.Hotel;
+import com.venture.venturetrip.model.admin.Package;
+import com.venture.venturetrip.model.admin.Route;
+import com.venture.venturetrip.model.admin.Travels;
+import com.venture.venturetrip.model.admin.Vehicles;
+import com.venture.venturetrip.model.user.PackageDTO;
+import com.venture.venturetrip.repository.AdminDao;
+import com.venture.venturetrip.repository.AdminSessionDAO;
+import com.venture.venturetrip.repository.HotelDao;
+import com.venture.venturetrip.repository.PackageDao;
+import com.venture.venturetrip.repository.RouteDao;
+import com.venture.venturetrip.repository.TravelsDao;
+import com.venture.venturetrip.repository.VehiclesDao;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -27,6 +48,9 @@ public class AdminServiceImpl implements AdminService{
     private VehiclesDao vehiclesDao;
 	@Autowired
 	private RouteDao routeDao;
+	
+	@Autowired
+	private PackageDao packageDao;
 
 
 	@Override
@@ -154,6 +178,7 @@ public class AdminServiceImpl implements AdminService{
 	public Vehicles addNewVehiclesDetails(Vehicles vehicles) throws RouteException {
 		Optional<Route> opt = routeDao.findById(vehicles.getRouteID());
 		if(opt.isPresent()){
+			 opt.get().setVehicles(vehicles);
 			return vehiclesDao.save(vehicles);
 		}else{
 			throw new RouteException("Route not found with route ID : "+vehicles.getRouteID());
@@ -176,6 +201,58 @@ public class AdminServiceImpl implements AdminService{
 		}else {
 			throw new VehiclesException("Vehicle does not exist with the vehicle number : "+vehicles.getVehicleNumber());
 		}
+
+	}
+
+	@Override
+	public Package addNewPackageDetails(Package package1, Integer travelsID, Integer routeID, Integer hotelID) throws PackageException {
+		
+	              Optional<Travels> opt = travelsdao.findById(travelsID);
+	              if(opt.isPresent()) {
+	            	  Optional<Route> opt2 = routeDao.findById(routeID);
+	            	  if(opt2.isPresent()) {
+	            		  Optional<Hotel> opt3 = hotelDao.findById(hotelID);
+	            		  if(opt3.isPresent()) {
+	            			  package1.setTravels(opt.get());
+	            			  package1.setRoute(opt2.get());
+	            			  package1.setHotel(opt3.get());
+	    	            	  return packageDao.save(package1); 
+	            		  }else {
+	            			  throw new PackageException("Hotel does exist with Hotel ID : "+hotelID); 
+	            		  }
+	            	  }else {
+	            		  throw new PackageException("Route does exist with Route ID : "+routeID);   
+	            	  }
+	            	 
+	              }else {
+	            	  throw new PackageException("Travels does exist with Travels ID : "+travelsID);  
+	              }
+	
+	
+	}
+
+	@Override
+	public List<PackageDTO> getAllPackageDetails(String from, String to) throws PackageException {
+		 
+		    List<Package> packages = packageDao.findAll();
+		    List<PackageDTO> packageDTOs = new ArrayList<>();
+		    for(Package pac : packages) {
+		    	PackageDTO p = new PackageDTO();
+		    	p.setPackageID(pac.getPackageID());
+		    	p.setPackageName(pac.getPackageName());
+		    	p.setHotelName(pac.getHotel().getHotelName());
+		    	p.setRouteForm(pac.getRoute().getRouteFrom());
+		    	p.setRouteTo(pac.getRoute().getRouteTo());
+		    	p.setTravellersName(pac.getTravels().getTravelsName());
+		    	p.setVehicleType("mera");
+		    	p.setFare(pac.getPackageCost());
+		    	packageDTOs.add(p);
+		    }
+		    if(packageDTOs.isEmpty()) {
+		    	throw new PackageException("No any package found");
+		    }else {
+		    	return packageDTOs;
+		    }
 
 	}
 
