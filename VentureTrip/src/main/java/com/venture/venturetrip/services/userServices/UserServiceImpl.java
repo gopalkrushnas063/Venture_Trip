@@ -14,6 +14,7 @@ import com.venture.venturetrip.exception.TravelsException;
 import com.venture.venturetrip.model.admin.Package;
 import com.venture.venturetrip.model.admin.Travels;
 import com.venture.venturetrip.model.user.Booking;
+import com.venture.venturetrip.model.user.CurrentUserSession;
 import com.venture.venturetrip.model.user.Customer;
 import com.venture.venturetrip.model.user.FeedBack;
 import com.venture.venturetrip.model.user.Ticket;
@@ -21,9 +22,8 @@ import com.venture.venturetrip.repository.BookingDao;
 import com.venture.venturetrip.repository.CustomerDao;
 import com.venture.venturetrip.repository.FeedBackDao;
 import com.venture.venturetrip.repository.PackageDao;
-
+import com.venture.venturetrip.repository.SessionDao;
 import com.venture.venturetrip.repository.TravelsDao;
-import com.venture.venturetrip.services.adminServices.RandomString;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -44,6 +44,8 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	 private PackageDao packageDao;
 	
+	@Autowired
+	private SessionDao sDao;
 	
 
 	@Override
@@ -222,6 +224,26 @@ public class UserServiceImpl implements UserService{
 		 }
 		
 		
+	}
+
+	@Override
+	public Customer updateCustomer(Customer customer, String key) throws CustomerException {
+		
+		CurrentUserSession loggedInUser= sDao.findByUuid(key);
+		
+		if(loggedInUser == null) {
+			throw new CustomerException("Please provide a valid key to update a customer");
+		}
+		
+		
+	
+		
+		if(customer.getCustomerID() == loggedInUser.getUserId()) {
+			//If LoggedInUser id is same as the id of supplied Customer which we want to update
+			return cDao.save(customer);
+		}
+		else
+			throw new CustomerException("Invalid Customer Details, please login first");
 	}
 	
 	

@@ -40,6 +40,7 @@ public interface UserService {
 	
 	public String bookNewTicket(Booking booking) throws BookingException;
 	
+	public Customer updateCustomer(Customer customer,String key)throws CustomerException;
 	
 	
 	
