@@ -1,13 +1,22 @@
 package com.venture.venturetrip.controller;
 
-import com.venture.venturetrip.exception.LoginException;
-import com.venture.venturetrip.model.admin.AdminDTO;
-import com.venture.venturetrip.model.admin.CurrentAdminSession;
-import com.venture.venturetrip.services.adminServices.AdminLoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.venture.venturetrip.exception.LoginException;
+import com.venture.venturetrip.model.admin.AdminDTO;
+import com.venture.venturetrip.model.admin.CurrentAdminSession;
+import com.venture.venturetrip.model.user.LoginDTO;
+import com.venture.venturetrip.services.adminServices.AdminLoginServiceImpl;
+import com.venture.venturetrip.services.userServices.LoginService;
 
 @RestController
 @RequestMapping("/login")
@@ -15,6 +24,9 @@ public class LoginController {
 
     @Autowired
     private AdminLoginServiceImpl adminLogInServiceImpl;
+    
+    @Autowired
+	private LoginService customerLogin;
 
     // for admin login
     @CrossOrigin
@@ -29,5 +41,24 @@ public class LoginController {
     public ResponseEntity<String> logOutAdmin(@RequestParam(required = false) String key) throws LoginException{
         return new ResponseEntity<String>(adminLogInServiceImpl.logOutAccount(key), HttpStatus.OK);
     }
+    
+	@PostMapping("/customerlogin")
+	public ResponseEntity<String> logInCustomer(@RequestBody LoginDTO dto) throws LoginException {
+		
+		String result = customerLogin.logIntoAccount(dto);
+		
+
+		
+		return new ResponseEntity<String>(result,HttpStatus.OK );
+		
+		
+	}
+	
+	@PostMapping("/customerlogout")
+	public String logoutCustomer(@RequestParam(required = false) String key) throws LoginException {
+		return customerLogin.logOutFromAccount(key);
+		
+	}
+	
 
 }
