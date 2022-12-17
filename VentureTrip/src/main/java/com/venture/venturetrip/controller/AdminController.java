@@ -4,6 +4,12 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.venture.venturetrip.exception.CustomerException;
+import com.venture.venturetrip.model.user.Customer;
+import com.venture.venturetrip.model.user.FeedBack;
+import com.venture.venturetrip.model.user.Ticket;
+import com.venture.venturetrip.repository.CustomerDao;
+import com.venture.venturetrip.services.userServices.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,15 +44,12 @@ public class AdminController {
     @Autowired AdminLoginService adminLoginService;
     @Autowired RouteServices routeServices;
 
+    @Autowired UserService cService;
 
 
 
 
-    @CrossOrigin
-    @PostMapping("/")
-    public ResponseEntity<Admin> saveAdmin(@Valid @RequestBody AdminSignInDTO admin) throws AdminException {
-        return new ResponseEntity<Admin>(adminService.createAdmin(admin), HttpStatus.ACCEPTED);
-    }
+
     // to update admin by passing key
     @CrossOrigin
     @PutMapping("/update")
@@ -165,5 +168,63 @@ public class AdminController {
     	List<PackageDTO> packagesDTOs = adminService.getAllPackageDetails(from, to);
     	
     	return new ResponseEntity<>(packagesDTOs,HttpStatus.OK);
+    }
+
+
+    @GetMapping("/customers")
+    public ResponseEntity<List<Customer>> getAllCustomer() throws CustomerException {
+
+        List<Customer> c = cService.getallCustomer();
+
+        return new ResponseEntity<List<Customer>>(c, HttpStatus.OK);
+
+    }
+
+    @GetMapping("/travels")
+    public ResponseEntity <List<Travels>> getallTravels() throws CustomerException {
+
+        List<Travels> c = cService.getallTravels();
+
+        return new ResponseEntity <List<Travels>> (c, HttpStatus.OK);
+
+    }
+
+    @GetMapping("/travels/{id}")
+    public ResponseEntity<Travels> getTravelById(@PathVariable("id") Integer id) throws CustomerException {
+
+        Travels c = cService.getTravelById(id);
+
+        return new ResponseEntity <Travels> (c, HttpStatus.OK);
+
+    }
+
+
+    @GetMapping("/ticketByBookingID/{bid}")
+    public ResponseEntity<Ticket>  getTicketByBookingId(@PathVariable("bid") Integer bid) throws CustomerException{
+
+        Ticket t = cService.getTicketByBookingId(bid);
+
+        return new ResponseEntity<Ticket>  (t, HttpStatus.OK);
+
+
+    }
+
+
+    @GetMapping("/customer/{id}")
+    public ResponseEntity<Customer> getCustomerbyid(@PathVariable("id") Integer id) throws CustomerException {
+
+        Customer c = cService.getCustomerBiID(id);
+
+        return new ResponseEntity<Customer>(c, HttpStatus.OK);
+
+    }
+
+
+    @GetMapping("/FeedBack/{Id}")
+    ResponseEntity<FeedBack> virewFeedBack(@PathVariable("Id") Integer feedbackID , @RequestBody FeedBack feedback){
+
+        FeedBack fb = cService.viewFeedBack(feedbackID);
+
+        return new ResponseEntity<FeedBack>(fb,HttpStatus.OK);
     }
 }

@@ -2,6 +2,8 @@ package com.venture.venturetrip.controller;
 
 import java.util.List;
 
+import com.venture.venturetrip.model.admin.Hotel;
+import com.venture.venturetrip.services.adminServices.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,18 +34,11 @@ public class UserController {
 	
 	@Autowired
 	private UserService cService;
+
+	@Autowired AdminService adminService;
 	
-	
-	
 
-	@PostMapping("/customers")
-	public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws CustomerException {
 
-		Customer c = cService.regCustomer(customer);
-
-		return new ResponseEntity<Customer>(c, HttpStatus.OK);
-
-	}
 	
 	@PutMapping("/updateCustomers")
 	public  ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer,@RequestParam(required = false) String key ) throws CustomerException {
@@ -66,14 +61,7 @@ public class UserController {
 
 	}
 	
-	@GetMapping("/customers")
-	public ResponseEntity<List<Customer>> getAllCustomer() throws CustomerException {
 
-		List<Customer> c = cService.getallCustomer();
-
-		return new ResponseEntity<List<Customer>>(c, HttpStatus.OK);
-
-	}
 	
 	
 	@GetMapping("/travels")
@@ -96,7 +84,7 @@ public class UserController {
 	
 
 	 
-    @GetMapping("/ticketwithbid/{bid}")
+    @GetMapping("/ticketByBookingID/{bid}")
 	 public ResponseEntity<Ticket>  getTicketByBookingId(@PathVariable("bid") Integer bid) throws CustomerException{
 		 
 		    Ticket t = cService.getTicketByBookingId(bid);
@@ -108,7 +96,7 @@ public class UserController {
     
     
 
-	@PostMapping("/FeedBack")
+	@PostMapping("/newFeedBack")
 	ResponseEntity<FeedBack> giveFeedBack(@RequestBody FeedBack feedback){
 		
 		FeedBack fb = cService.addFeedback(feedback);
@@ -140,7 +128,7 @@ public class UserController {
 		return new ResponseEntity<FeedBack>(fb,HttpStatus.ACCEPTED);
 	}
     
-    @PostMapping("/booking")
+    @PostMapping("/newBooking")
 	 ResponseEntity<String> bookNewTicketHandler(@RequestBody Booking booking){
     	
     	String ticketID = cService.bookNewTicket(booking);
@@ -149,6 +137,13 @@ public class UserController {
 		
 	}
 
-	
+
+	@GetMapping("/hotels")
+	public ResponseEntity<List<Hotel>> getAllHotelHandler(){
+
+		List<Hotel> returnedHotels = adminService.getAllHotelDetails();
+
+		return new ResponseEntity<List<Hotel>>(returnedHotels, HttpStatus.OK);
+	}
 
 }

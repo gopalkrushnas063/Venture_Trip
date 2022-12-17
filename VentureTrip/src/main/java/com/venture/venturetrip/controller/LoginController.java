@@ -1,5 +1,12 @@
 package com.venture.venturetrip.controller;
 
+import com.venture.venturetrip.exception.AdminException;
+import com.venture.venturetrip.exception.CustomerException;
+import com.venture.venturetrip.model.admin.Admin;
+import com.venture.venturetrip.model.admin.AdminSignInDTO;
+import com.venture.venturetrip.model.user.Customer;
+import com.venture.venturetrip.services.adminServices.AdminService;
+import com.venture.venturetrip.services.userServices.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +25,31 @@ import com.venture.venturetrip.model.user.LoginDTO;
 import com.venture.venturetrip.services.adminServices.AdminLoginServiceImpl;
 import com.venture.venturetrip.services.userServices.LoginService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/login")
 public class LoginController {
 
     @Autowired
     private AdminLoginServiceImpl adminLogInServiceImpl;
+
+    @Autowired
+    private UserService cService;
     
     @Autowired
 	private LoginService customerLogin;
+
+    @Autowired
+    private AdminService adminService;
+
+
+
+    @CrossOrigin
+    @PostMapping("/registerAdmin")
+    public ResponseEntity<Admin> saveAdmin(@Valid @RequestBody AdminSignInDTO admin) throws AdminException {
+        return new ResponseEntity<Admin>(adminService.createAdmin(admin), HttpStatus.ACCEPTED);
+    }
 
     // for admin login
     @CrossOrigin
@@ -40,6 +63,21 @@ public class LoginController {
     @PatchMapping("/adminlogout")
     public ResponseEntity<String> logOutAdmin(@RequestParam(required = false) String key) throws LoginException{
         return new ResponseEntity<String>(adminLogInServiceImpl.logOutAccount(key), HttpStatus.OK);
+    }
+
+
+
+
+
+
+
+    @PostMapping("/registerCustomer")
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws CustomerException {
+
+        Customer c = cService.regCustomer(customer);
+
+        return new ResponseEntity<Customer>(c, HttpStatus.OK);
+
     }
     
 	@PostMapping("/customerlogin")

@@ -237,16 +237,18 @@ public class AdminServiceImpl implements AdminService{
 		    List<Package> packages = packageDao.findAll();
 		    List<PackageDTO> packageDTOs = new ArrayList<>();
 		    for(Package pac : packages) {
-		    	PackageDTO p = new PackageDTO();
-		    	p.setPackageID(pac.getPackageID());
-		    	p.setPackageName(pac.getPackageName());
-		    	p.setHotelName(pac.getHotel().getHotelName());
-		    	p.setRouteForm(pac.getRoute().getRouteFrom());
-		    	p.setRouteTo(pac.getRoute().getRouteTo());
-		    	p.setTravellersName(pac.getTravels().getTravelsName());
-		    	p.setVehicleType("mera");
-		    	p.setFare(pac.getPackageCost());
-		    	packageDTOs.add(p);
+				if(pac.getRoute().getRouteFrom().equalsIgnoreCase(from) && pac.getRoute().getRouteTo().equalsIgnoreCase(to)){
+					PackageDTO p = new PackageDTO();
+					p.setPackageID(pac.getPackageID());
+					p.setPackageName(pac.getPackageName());
+					p.setHotelName(pac.getHotel().getHotelName());
+					p.setRouteForm(pac.getRoute().getRouteFrom());
+					p.setRouteTo(pac.getRoute().getRouteTo());
+					p.setTravellersName(pac.getTravels().getTravelsName());
+					p.setVehicleType(pac.getRoute().getVehicles().getVehicleType());
+					p.setFare(pac.getPackageCost());
+					packageDTOs.add(p);
+				}
 		    }
 		    if(packageDTOs.isEmpty()) {
 		    	throw new PackageException("No any package found");
