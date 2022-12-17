@@ -2,6 +2,7 @@ package com.venture.venturetrip.services.userServices;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -214,6 +215,9 @@ public class UserServiceImpl implements UserService{
 		 
 		 if(pack.isPresent()) {
 			 if(booking.getAmount() == pack.get().getPackageCost()) {
+				 
+				 Integer bookingID = new Random().nextInt(999999);
+				 booking.setBookingID(bookingID);
 		     return "Your Booking ID is " +bookingDao.save(booking).getBookingID() + " Please find out Your Ticket with the help of BookingID";
 			 }else {
 				 throw new BookingException("Amount should be equals to the given price :"+pack.get().getPackageCost());

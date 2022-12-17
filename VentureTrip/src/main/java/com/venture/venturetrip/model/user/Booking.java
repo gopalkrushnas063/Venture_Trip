@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -21,7 +23,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Booking {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Integer bookingID;
     private String name;
     private String address;
@@ -31,6 +33,6 @@ public class Booking {
     private Integer amount;
     private LocalDate DateOfJourney;
     
- 
+  
 
 }

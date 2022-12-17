@@ -55,20 +55,23 @@ public class LoginController {
     @CrossOrigin
     @PostMapping("/adminlogin")
     public ResponseEntity<CurrentAdminSession> logInAdmin(@RequestBody AdminDTO adminDTO) throws LoginException {
-        return new ResponseEntity<CurrentAdminSession>(adminLogInServiceImpl.logIntoAccount(adminDTO), HttpStatus.OK);
+    	CurrentAdminSession cas = adminLogInServiceImpl.logIntoAccount(adminDTO);
+    	if(cas != null) {
+    		AdminController.isLogin = true;
+    	}
+        return new ResponseEntity<CurrentAdminSession>(cas, HttpStatus.OK);
     }
 
     // for admin logout
     @CrossOrigin
     @PatchMapping("/adminlogout")
     public ResponseEntity<String> logOutAdmin(@RequestParam(required = false) String key) throws LoginException{
-        return new ResponseEntity<String>(adminLogInServiceImpl.logOutAccount(key), HttpStatus.OK);
+    	String cas = adminLogInServiceImpl.logOutAccount(key);
+    	if(cas != null) {
+    		AdminController.isLogin = false;
+    	}
+        return new ResponseEntity<String>(cas, HttpStatus.OK);
     }
-
-
-
-
-
 
 
     @PostMapping("/registerCustomer")
@@ -84,9 +87,10 @@ public class LoginController {
 	public ResponseEntity<String> logInCustomer(@RequestBody LoginDTO dto) throws LoginException {
 		
 		String result = customerLogin.logIntoAccount(dto);
-		
+		if(result != null) {
+    		UserController.isLogin = true;
+    	}
 
-		
 		return new ResponseEntity<String>(result,HttpStatus.OK );
 		
 		
@@ -94,7 +98,11 @@ public class LoginController {
 	
 	@PatchMapping("/customerlogout")
 	public String logoutCustomer(@RequestParam(required = false) String key) throws LoginException {
-		return customerLogin.logOutFromAccount(key);
+		String result = customerLogin.logOutFromAccount(key);
+		if(result != null) {
+    		UserController.isLogin = false;
+    	}
+		return result;
 		
 	}
 	

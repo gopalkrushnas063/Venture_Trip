@@ -24,16 +24,18 @@ public interface UserService {
 	
 	
 	public Customer regCustomer(Customer customer) throws CustomerException;
+	
 	public Customer getCustomerBiID(Integer c_id) throws CustomerException;
+	
 	public List<Customer> getallCustomer() throws CustomerException;
+	
 	public List<Travels> getallTravels() throws TravelsException;
+	
 	public Travels getTravelById(Integer t_id) throws TravelsException;
 	
+    public Ticket getTicketByBookingId(Integer bookingID) throws TicketException;
 	
-	public Ticket getTicketByBookingId(Integer bookingID) throws TicketException;
-	
-
-	public FeedBack addFeedback(FeedBack feedback) throws FeedbackException;
+    public FeedBack addFeedback(FeedBack feedback) throws FeedbackException;
 	
 	public FeedBack viewFeedBack(Integer feedbackID) throws FeedbackException;
 	

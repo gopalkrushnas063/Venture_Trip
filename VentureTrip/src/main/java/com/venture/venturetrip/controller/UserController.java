@@ -39,139 +39,193 @@ public class UserController {
 
 	@Autowired AdminService adminService;
 	
-
+    static boolean isLogin = false;
 
 	
 	@PutMapping("/updateCustomers")
-	public  ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer,@RequestParam(required = false) String key ) throws CustomerException {
+	public  ResponseEntity<Object> updateCustomer(@RequestBody Customer customer,@RequestParam(required = false) String key ) throws CustomerException {
 		
-		
+		if(isLogin) {
 		Customer updatedCustomer= cService.updateCustomer(customer, key);
 				
-		return new ResponseEntity<Customer>(updatedCustomer,HttpStatus.OK);
+		return new ResponseEntity<>(updatedCustomer,HttpStatus.OK);
 		
+		}else {
+			
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 	}
 	
 	
 
 	@GetMapping("/customer/{id}")
-	public ResponseEntity<Customer> getCustomerbyid(@PathVariable("id") Integer id) throws CustomerException {
-
+	public ResponseEntity<Object> getCustomerbyid(@PathVariable("id") Integer id) throws CustomerException {
+	if(isLogin) {
 		Customer c = cService.getCustomerBiID(id);
 
-		return new ResponseEntity<Customer>(c, HttpStatus.OK);
-
+		return new ResponseEntity<>(c, HttpStatus.OK);
+	}else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 	}
 	
 
 	
 	
 	@GetMapping("/travels")
-	public ResponseEntity <List<Travels>> getallTravels() throws CustomerException {
-
+	public ResponseEntity <Object> getallTravels() throws CustomerException {
+	if(isLogin) {
 		List<Travels> c = cService.getallTravels();
 
-		return new ResponseEntity <List<Travels>> (c, HttpStatus.OK);
-
+		return new ResponseEntity <> (c, HttpStatus.OK);
+	}else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 	}
 	
 	@GetMapping("/travels/{id}")
-	public ResponseEntity<Travels> getTravelById(@PathVariable("id") Integer id) throws CustomerException {
+	public ResponseEntity<Object> getTravelById(@PathVariable("id") Integer id) throws CustomerException {
 
+		if(isLogin) {
 		Travels c = cService.getTravelById(id);
 
-		return new ResponseEntity <Travels> (c, HttpStatus.OK);
-
+		return new ResponseEntity <> (c, HttpStatus.OK);
+	}else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 	}
 	
 
 	 
     @GetMapping("/ticketByBookingID/{bid}")
-	 public ResponseEntity<Ticket>  getTicketByBookingId(@PathVariable("bid") Integer bid) throws CustomerException{
-		 
+	 public ResponseEntity<Object>  getTicketByBookingId(@PathVariable("bid") Integer bid) throws CustomerException{
+		if(isLogin) {
+			
 		    Ticket t = cService.getTicketByBookingId(bid);
 
-			return new ResponseEntity<Ticket>  (t, HttpStatus.OK);
-		 
+			return new ResponseEntity<>(t, HttpStatus.OK);
+    }else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 		 
 	 }
     
     
 
 	@PostMapping("/newFeedBack")
-	ResponseEntity<FeedBack> giveFeedBack(@RequestBody FeedBack feedback){
-		
+	ResponseEntity<Object> giveFeedBack(@RequestBody FeedBack feedback){
+		if(isLogin) {
+			
 		FeedBack fb = cService.addFeedback(feedback);
 		
-		return new ResponseEntity<FeedBack>(fb,HttpStatus.CREATED);
+		return new ResponseEntity<>(fb,HttpStatus.CREATED);
+	}else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 	}
 	
 	@GetMapping("/FeedBack/{Id}")
-	ResponseEntity<FeedBack> virewFeedBack(@PathVariable("Id") Integer feedbackID ,@RequestBody FeedBack feedback){
-		
+	ResponseEntity<Object> virewFeedBack(@PathVariable("Id") Integer feedbackID ,@RequestBody FeedBack feedback){
+		if(isLogin) {
 		FeedBack fb = cService.viewFeedBack(feedbackID);
 		
-		return new ResponseEntity<FeedBack>(fb,HttpStatus.OK);
+		return new ResponseEntity<>(fb,HttpStatus.OK);
+	}else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 	}
 	
 	@PutMapping("/updateFeedback/{Id}")
-	ResponseEntity<FeedBack> updateFeedBack(@PathVariable("Id") Integer feedbackID, @RequestBody FeedBack feedback){
-		
+	ResponseEntity<Object> updateFeedBack(@PathVariable("Id") Integer feedbackID, @RequestBody FeedBack feedback){
+		if(isLogin) {
 		FeedBack fb = cService.updateFeedBack(feedback);
 		
-		return new ResponseEntity<FeedBack>(fb,HttpStatus.OK);
+		return new ResponseEntity<>(fb,HttpStatus.OK);
+	}else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 	}
 	
 	@DeleteMapping("/deleteFeedback/{Id}")
-	ResponseEntity<FeedBack> deleteFeedBack(@PathVariable("Id") Integer feedbackID, @RequestBody FeedBack feedback){
-		
+	ResponseEntity<Object> deleteFeedBack(@PathVariable("Id") Integer feedbackID, @RequestBody FeedBack feedback){
+		if(isLogin) {
 		FeedBack fb = cService.deleteFeedBack(feedback);
 		
-		return new ResponseEntity<FeedBack>(fb,HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(fb,HttpStatus.ACCEPTED);
+	}else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 	}
     
     @PostMapping("/newBooking")
 	 ResponseEntity<String> bookNewTicketHandler(@RequestBody Booking booking){
-    	
+		if(isLogin) {
     	String ticketID = cService.bookNewTicket(booking);
     	
     	return new ResponseEntity<String>(ticketID,HttpStatus.ACCEPTED);
+    }else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 		
 	}
 
 
 	@GetMapping("/hotels")
-	public ResponseEntity<List<Hotel>> getAllHotelHandler(){
-
+	public ResponseEntity<Object> getAllHotelHandler(){
+		if(isLogin) {
 		List<Hotel> returnedHotels = adminService.getAllHotelDetails();
 
-		return new ResponseEntity<List<Hotel>>(returnedHotels, HttpStatus.OK);
+		return new ResponseEntity<>(returnedHotels, HttpStatus.OK);
+	}else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 	}
 	
 	
 	@GetMapping("/packages")
-	public ResponseEntity<List<Package>> getAllpackage(){
-
+	public ResponseEntity<Object> getAllpackage(){
+		if(isLogin) {
 		List<Package> returnedHotels = cService.getPacakge();
 
-		return new ResponseEntity<List<Package>>(returnedHotels, HttpStatus.OK);
+		return new ResponseEntity<>(returnedHotels, HttpStatus.OK);
+	}else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 	}
 	
 	
 	@GetMapping("/packages/{Id}")
-	public ResponseEntity<Package> getpackagebyId(@PathVariable("Id") Integer packageID){
-
+	public ResponseEntity<Object> getpackagebyId(@PathVariable("Id") Integer packageID){
+		if(isLogin) {
 		Package pkg = cService.getPacakgebyId(packageID);
 		
-	
-
-		return new  ResponseEntity<Package> (pkg, HttpStatus.OK);
+		return new  ResponseEntity<Object> (pkg, HttpStatus.OK);
+	}else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 	}
 	
 	@DeleteMapping("/cancelbooking/{id}")
-	public ResponseEntity<Booking> cancelBooking(@PathVariable("id") Integer id) throws BookingException{
+	public ResponseEntity<Object> cancelBooking(@PathVariable("id") Integer id) throws BookingException{
+		if(isLogin) {
 		Booking booking= cService.cancelBooking(id);
-		return new ResponseEntity<Booking>(booking,HttpStatus.OK);
+		return new ResponseEntity<>(booking,HttpStatus.OK);
+	}else {
+		
+	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
 	}
 
 }
