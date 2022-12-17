@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.venture.venturetrip.exception.BookingException;
 import com.venture.venturetrip.exception.CustomerException;
 import com.venture.venturetrip.exception.FeedbackException;
+import com.venture.venturetrip.exception.PackageException;
 import com.venture.venturetrip.exception.TicketException;
 import com.venture.venturetrip.exception.TravelsException;
 import com.venture.venturetrip.model.admin.Package;
@@ -245,6 +246,52 @@ public class UserServiceImpl implements UserService{
 		else
 			throw new CustomerException("Invalid Customer Details, please login first");
 	}
+	
+	
+	@Override
+	public List<Package> getPacakge() throws PackageException {
+		
+		 List<Package> pkg = packageDao.findAll();
+			
+			if (pkg.size() == 0) {
+				
+				throw new PackageException("No Package list in database");
+			} 
+			else {
+				return  pkg;
+			}
+			
+	}
+
+	@Override
+	public Package getPacakgebyId(Integer packId) throws PackageException {
+		
+     Optional<Package> opt = packageDao.findById(packId);
+		
+		if(opt.isEmpty()) {
+			throw new PackageException("Pacakge Doesn't Exsist By This Id :"+ packId);
+		}
+		else {
+			return opt.get();
+		}
+	}
+
+	@Override
+	public Booking cancelBooking(Integer bookingId) throws BookingException {
+		
+		Optional<Booking> bookingOptional = bookingDao.findById(bookingId);
+		if (bookingOptional.isPresent()) {
+			Booking booking = bookingOptional.get();
+			bookingDao.deleteById(bookingId);
+
+			return booking;
+		} else {
+			throw new BookingException("Invalid Booking ID");
+		}
+	}
+
+	
+
 	
 	
 
