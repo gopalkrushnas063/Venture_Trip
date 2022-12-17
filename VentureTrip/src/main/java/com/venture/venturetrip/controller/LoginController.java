@@ -1,12 +1,7 @@
 package com.venture.venturetrip.controller;
 
-import com.venture.venturetrip.exception.AdminException;
-import com.venture.venturetrip.exception.CustomerException;
-import com.venture.venturetrip.model.admin.Admin;
-import com.venture.venturetrip.model.admin.AdminSignInDTO;
-import com.venture.venturetrip.model.user.Customer;
-import com.venture.venturetrip.services.adminServices.AdminService;
-import com.venture.venturetrip.services.userServices.UserService;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.venture.venturetrip.exception.AdminException;
+import com.venture.venturetrip.exception.CustomerException;
 import com.venture.venturetrip.exception.LoginException;
+import com.venture.venturetrip.model.admin.Admin;
 import com.venture.venturetrip.model.admin.AdminDTO;
+import com.venture.venturetrip.model.admin.AdminSignInDTO;
 import com.venture.venturetrip.model.admin.CurrentAdminSession;
+import com.venture.venturetrip.model.user.Customer;
 import com.venture.venturetrip.model.user.LoginDTO;
 import com.venture.venturetrip.services.adminServices.AdminLoginServiceImpl;
+import com.venture.venturetrip.services.adminServices.AdminService;
 import com.venture.venturetrip.services.userServices.LoginService;
-
-import javax.validation.Valid;
+import com.venture.venturetrip.services.userServices.UserService;
 
 @RestController
 @RequestMapping("/login")
@@ -92,7 +92,7 @@ public class LoginController {
 		
 	}
 	
-	@PostMapping("/customerlogout")
+	@PatchMapping("/customerlogout")
 	public String logoutCustomer(@RequestParam(required = false) String key) throws LoginException {
 		return customerLogin.logOutFromAccount(key);
 		
