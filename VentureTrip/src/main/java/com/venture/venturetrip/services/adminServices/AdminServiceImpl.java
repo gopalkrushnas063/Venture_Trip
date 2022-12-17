@@ -179,7 +179,7 @@ public class AdminServiceImpl implements AdminService{
 		Optional<Route> opt = routeDao.findById(vehicles.getRouteID());
 		if(opt.isPresent()){
 			 opt.get().setVehicles(vehicles);
-			return vehiclesDao.save(vehicles);
+			 return opt.get().getVehicles();
 		}else{
 			throw new RouteException("Route not found with route ID : "+vehicles.getRouteID());
 		}

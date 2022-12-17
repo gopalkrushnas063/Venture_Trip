@@ -2,8 +2,6 @@ package com.venture.venturetrip.controller;
 
 import java.util.List;
 
-import com.venture.venturetrip.model.admin.Hotel;
-import com.venture.venturetrip.services.adminServices.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.venture.venturetrip.exception.BookingException;
 import com.venture.venturetrip.exception.CustomerException;
+import com.venture.venturetrip.model.admin.Hotel;
 import com.venture.venturetrip.model.admin.Travels;
 import com.venture.venturetrip.model.user.Booking;
 import com.venture.venturetrip.model.user.Customer;
 import com.venture.venturetrip.model.user.FeedBack;
 import com.venture.venturetrip.model.user.Ticket;
+import com.venture.venturetrip.services.adminServices.AdminService;
 import com.venture.venturetrip.services.userServices.UserService;
+import com.venture.venturetrip.model.admin.Package;
 
 //import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -144,6 +146,32 @@ public class UserController {
 		List<Hotel> returnedHotels = adminService.getAllHotelDetails();
 
 		return new ResponseEntity<List<Hotel>>(returnedHotels, HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/packages")
+	public ResponseEntity<List<Package>> getAllpackage(){
+
+		List<Package> returnedHotels = cService.getPacakge();
+
+		return new ResponseEntity<List<Package>>(returnedHotels, HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/packages/{Id}")
+	public ResponseEntity<Package> getpackagebyId(@PathVariable("Id") Integer packageID){
+
+		Package pkg = cService.getPacakgebyId(packageID);
+		
+	
+
+		return new  ResponseEntity<Package> (pkg, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/cancelbooking/{id}")
+	public ResponseEntity<Booking> cancelBooking(@PathVariable("id") Integer id) throws BookingException{
+		Booking booking= cService.cancelBooking(id);
+		return new ResponseEntity<Booking>(booking,HttpStatus.OK);
 	}
 
 }
