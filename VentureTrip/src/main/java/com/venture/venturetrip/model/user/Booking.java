@@ -29,7 +29,7 @@ public class Booking {
     private LocalDate bookingDate;
     private Integer packageID;
     private Integer amount;
-    private LocalDate DateofJourney;
+    private LocalDate DateOfJourney;
     
  
 

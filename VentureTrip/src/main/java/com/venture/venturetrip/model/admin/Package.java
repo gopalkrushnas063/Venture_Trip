@@ -29,10 +29,7 @@ public class Package {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer packageID;
     private String packageName;
-  
     private String description;
-  
-  
     private Integer packageCost;
     
     @JsonIgnore

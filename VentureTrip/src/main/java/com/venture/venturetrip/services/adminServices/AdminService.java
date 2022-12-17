@@ -44,6 +44,8 @@ public interface AdminService {
     public Package addNewPackageDetails(Package package1, Integer travelsID, Integer routeID, Integer hotelID) throws PackageException;
     
     public List<PackageDTO> getAllPackageDetails(String from, String to) throws PackageException;
+    public Package updatePackageDetails(Package pack) throws PackageException;
 
+    public Package removePackageDetailsByID(Integer packID) throws PackageException;
     
 }

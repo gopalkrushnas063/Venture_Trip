@@ -9,20 +9,12 @@ import com.venture.venturetrip.model.user.Customer;
 import com.venture.venturetrip.model.user.FeedBack;
 import com.venture.venturetrip.model.user.Ticket;
 import com.venture.venturetrip.repository.CustomerDao;
+import com.venture.venturetrip.repository.PackageDao;
 import com.venture.venturetrip.services.userServices.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.venture.venturetrip.exception.AdminException;
 import com.venture.venturetrip.model.admin.Admin;
@@ -45,9 +37,8 @@ public class AdminController {
     @Autowired RouteServices routeServices;
 
     @Autowired UserService cService;
-
-
-
+    @Autowired
+    private PackageDao packageDao;
 
 
     // to update admin by passing key
@@ -226,5 +217,17 @@ public class AdminController {
         FeedBack fb = cService.viewFeedBack(feedbackID);
 
         return new ResponseEntity<FeedBack>(fb,HttpStatus.OK);
+    }
+
+    @PutMapping("/packageUpdate/{packageID}")
+    ResponseEntity<Package> updatePackageHandler(@PathVariable("packageID") Package pack){
+        Package updatedPackage = adminService.updatePackageDetails(pack);
+        return new ResponseEntity<Package>(updatedPackage,HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/package/{packageID}")
+    public ResponseEntity<Package> removePackageHandler(@PathVariable("packageID") Integer packID){
+        Package aPackage = adminService.removePackageDetailsByID(packID);
+        return new ResponseEntity<Package>(aPackage,HttpStatus.OK);
     }
 }

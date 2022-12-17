@@ -126,7 +126,7 @@ public class UserServiceImpl implements UserService{
 					 Ticket ticket = new Ticket();
 					 
                      ticket.setTicketID(bookingID);
-					 ticket.setDateofJourney(booking.get().getDateofJourney()); 
+					 ticket.setDateofJourney(booking.get().getDateOfJourney());
 					 ticket.setFrom(pack.get().getRoute().getRouteFrom());
 					 ticket.setTo(pack.get().getRoute().getRouteTo());
 					 ticket.setTicketCost(booking.get().getAmount());

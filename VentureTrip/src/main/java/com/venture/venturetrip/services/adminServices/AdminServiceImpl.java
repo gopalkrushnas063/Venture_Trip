@@ -258,6 +258,26 @@ public class AdminServiceImpl implements AdminService{
 
 	}
 
+	@Override
+	public Package updatePackageDetails(Package pack) throws PackageException {
+		Optional<Package> opt = packageDao.findById(pack.getPackageID());
+		if(opt.isPresent()) {
+			return packageDao.save(pack);
+		}else {
+			throw new PackageException("Package does exist with Package ID : "+pack.getPackageID());
+		}
+	}
+
+	@Override
+	public Package removePackageDetailsByID(Integer packID) throws PackageException {
+		Optional<Package> opt = packageDao.findById(packID);
+		if(opt.isPresent()){
+			packageDao.deleteById(packID);
+			return opt.get();
+		}else {
+			throw new PackageException("Package does not exist with package ID : "+packID);
+		}
+	}
 
 
 }
