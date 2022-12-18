@@ -72,3 +72,10 @@
 </tr>
 </tbody>
 </table>
+
+</table>
+
+<hr>
+
+<h3 align="center">MySQL Schema Database Structure</h3>
+<p align="center"><img src="https://user-images.githubusercontent.com/103574856/208289732-29376827-ee8c-42da-8422-e516beeb9c70.png"/></p>
