@@ -134,7 +134,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/FeedBack/{Id}")
-	ResponseEntity<Object> virewFeedBack(@PathVariable("Id") Integer feedbackID ,@RequestBody FeedBack feedback){
+	ResponseEntity<Object> virewFeedBack(@PathVariable("Id") Integer feedbackID){
 		if(isLogin) {
 		FeedBack fb = cService.viewFeedBack(feedbackID);
 		

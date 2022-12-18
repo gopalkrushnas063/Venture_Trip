@@ -245,7 +245,7 @@ public class AdminServiceImpl implements AdminService{
 					p.setRouteForm(pac.getRoute().getRouteFrom());
 					p.setRouteTo(pac.getRoute().getRouteTo());
 					p.setTravellersName(pac.getTravels().getTravelsName());
-					p.setVehicleType(pac.getRoute().getVehicles().getVehicleType());
+					p.setVehicleType("Bus");
 					p.setFare(pac.getPackageCost());
 					packageDTOs.add(p);
 				}

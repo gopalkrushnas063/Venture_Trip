@@ -32,6 +32,13 @@ public class CurrentAdminSession {
     private LocalDateTime localDateTime;
 
 
-    public CurrentAdminSession(Integer adminId, String key, LocalDateTime now) {
+    public CurrentAdminSession(Integer adminId, String uuid, LocalDateTime localDateTime) {
+        super();
+        this.adminId = adminId;
+        this.uuid = uuid;
+        this.localDateTime = localDateTime;
     }
+
+
+
 }

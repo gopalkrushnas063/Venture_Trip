@@ -180,7 +180,7 @@ public class UserServiceImpl implements UserService{
 		Optional<FeedBack> opt = fDao.findById(feedbackID);
 		
 		if(opt.isEmpty()) {
-			throw new FeedbackException("FeedBack Doesn't Exsist By This Id :"+ feedbackID);
+			throw new FeedbackException("FeedBack Doesn't Exist By This Id :"+ feedbackID);
 		}
 		else {
 			return opt.get();

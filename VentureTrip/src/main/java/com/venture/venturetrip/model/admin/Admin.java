@@ -36,8 +36,6 @@ public class Admin {
     private String mobile;
     
     private String userType="admin";
-    
 
-    
 
 }
