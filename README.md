@@ -56,7 +56,7 @@
 <tr valign="top">
 <td width="15%" align="center">
 <p dir="auto"><span>𝗦𝗽𝗿𝗶𝗻𝗴 𝗕𝗼𝗼𝘁</span><br><br></p>
-<a><img src="https://spring.io/images/projects/spring-edf462fec682b9d48cf628eaf9e19521.svg" height="50"></a>
+<a><img src="https://spring.io/images/projects/spring-edf462fec682b9d48cf628eaf9e19521.svg" height="40"></a>
 </td>
 <td width="15%" align="center">
 <p dir="auto"><span>𝐌𝐚𝐯𝐞𝐧</span><br><br></p>
