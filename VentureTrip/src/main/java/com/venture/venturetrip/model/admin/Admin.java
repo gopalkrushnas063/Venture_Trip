@@ -28,8 +28,7 @@ public class Admin {
     @Size(min=3,max=20, message = "Admin Name should have minimum 3 and maximum 20 character!")
     private String adminName;
 
-    @NotNull
-    @Size(min = 2, max = 30,message = "Password should contains alphabet,numeric ,special characters ans it has also minimum 4 to 12 characters")
+    @Size(min = 4, max = 12,message = "Password should has minimum 4 to 12 characters")
     private String password;
     @Email
     private String email;

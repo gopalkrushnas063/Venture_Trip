@@ -395,7 +395,7 @@ public class UserServiceImpl implements UserService{
 
 		@Override
 		public List<Package> getPackageByDate(LocalDate doj) throws PackageException {
-			 int flag = 0;
+		
 		 	 List<Package> packages = packageDao.findAll();
 			  List<Package> newPackage = packageDao.findAll();
 			 for(Package pack: packages) {

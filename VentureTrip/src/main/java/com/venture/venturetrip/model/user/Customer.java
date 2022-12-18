@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,13 +28,13 @@ public class Customer {
 	@NotNull
     private String customerName;
 
-	@Pattern(regexp = "^((?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])){4,12}$",message = "Password should contains alphabet,numeric ,special characters ans it has also minimum 4 to 12 characters")
+	@Size(min=4,max=12,message = "Password should has minimum 4 to 12 characters")
 	private String customerPassword;
 
 	@NotNull
     private String address;
 
-	@Pattern(regexp="(^$|[0-9]{10})",message = "Phone number should be 10 digits")
+    @Size(min=10, message ="Mobile Number should be of 10 digits!")
 	private String mobileNumber;
 
 	@Email

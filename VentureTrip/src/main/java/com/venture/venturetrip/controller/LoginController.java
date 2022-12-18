@@ -42,6 +42,7 @@ public class LoginController {
 
     @Autowired
     private AdminService adminService;
+    
 
 
 
@@ -76,24 +77,23 @@ public class LoginController {
 
     @PostMapping("/registerCustomer")
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws CustomerException {
+       
+        	  Customer c = cService.regCustomer(customer);
 
-        Customer c = cService.regCustomer(customer);
-
-        return new ResponseEntity<Customer>(c, HttpStatus.OK);
-
+              return new ResponseEntity<Customer>(c, HttpStatus.OK);	
+      
     }
     
 	@PostMapping("/customerlogin")
 	public ResponseEntity<String> logInCustomer(@RequestBody LoginDTO dto) throws LoginException {
-		
-		String result = customerLogin.logIntoAccount(dto);
-		if(result != null) {
-    		UserController.isLogin = true;
-    	}
+	
+			String result = customerLogin.logIntoAccount(dto);
+			if(result != null) {
+	    		UserController.isLogin = true;
+	    	}
 
-		return new ResponseEntity<String>(result,HttpStatus.OK );
-		
-		
+			return new ResponseEntity<String>(result,HttpStatus.OK );	
+	
 	}
 	
 	@PatchMapping("/customerlogout")

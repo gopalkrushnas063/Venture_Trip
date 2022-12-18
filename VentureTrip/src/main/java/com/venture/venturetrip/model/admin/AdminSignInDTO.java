@@ -19,11 +19,11 @@ public class AdminSignInDTO {
     private String email;
 
     @Column(unique = true)
-	@Pattern(regexp="(^$|[0-9]{10})",message = "Phone number should be 10 digits")
+	@Size(min=10,message = "Phone number should be 10 digits")
     private String mobile;
 
-	@Pattern(regexp = "(^(?=.[0-9])(?=.[a-z])(?=.[A-Z]).{8,20}$)" , message = "Password should contains alphabet,numeric ,special characters ans it has also minimum 4 to 12 characters")
-	private String password;
+    @Size(min = 4, max = 12,message = "Password should has minimum 4 to 12 characters")
+    private String password;
     
     
 

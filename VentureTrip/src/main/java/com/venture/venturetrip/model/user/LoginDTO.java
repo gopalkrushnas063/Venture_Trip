@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
@@ -15,8 +16,9 @@ public class LoginDTO {
 	@Email
 	private String email;
 
-	@Pattern(regexp = "^((?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])){4,12}$",message = "Password should contains alphabet,numeric ,special characters ans it has also minimum 4 to 12 characters")
+	@Size(min=4,max=12,message = "Password should has minimum 4 to 12 characters")
 	private String password;
+	
 	//private String role;
 	
 }
