@@ -31,7 +31,7 @@
 | Architecture  | CRUD, MVC |
   
 </td>
-<td width="25%" align="center">
+<td width="20%" align="center">
 <h3>Languages and Tools:</h3>
 <table align="center">
 <tbody>
