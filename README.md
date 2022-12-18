@@ -80,5 +80,15 @@
 <h3 align="center">MySQL Schema Database Structure</h3>
 <p align="center"><img src="https://user-images.githubusercontent.com/103574856/208289732-29376827-ee8c-42da-8422-e516beeb9c70.png"/></p>
 
+<h3>Admin Table : </h3>
 
+
+| Field | Type | Null | Key | Default | Extra |
+| --- | --- | --- | --- | --- | --- |
+| Admin_Name | VARCHAR(20) | YES |   | null |
+| AdminID | varchar(255) | YES |  | null |
+| Email | varchar(255) | YES |  | null |
+| Mobile  | varchar(255) | YES |  | null |
+| Password  | varchar(30) | NO |  | null |
+| Architecture  | varchar(255) | YES |  | null |
 
