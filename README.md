@@ -16,8 +16,8 @@
 
 <table align="center">
 <tbody>
-<tr valign="top">
-<td width="25%" align="center">
+<tr align="top">
+<td width="20%" align="center">
 
 <h3>Software Requirements</h3>
   
