@@ -81,6 +81,10 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/103574856/208312888-183662ec-d1d3-41c7-b483-6a8f7eed1111.png"/></p>
 
 <h3>Admin Table : </h3>
+<table align="center">
+<tbody>
+<tr align="top">
+<td width="50%" align="center">
 
 
 | Field | Type | Null | Key | Default | Extra |
@@ -91,4 +95,10 @@
 | Mobile  | varchar(255) | YES |  | null |
 | Password  | varchar(30) | NO |  | null |
 | Architecture  | varchar(255) | YES |  | null |
+
+
+</td>
+</tr>
+</tbody>
+</table>
 
