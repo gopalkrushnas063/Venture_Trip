@@ -1,5 +1,6 @@
 package com.venture.venturetrip.services.userServices;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -393,27 +394,22 @@ public class UserServiceImpl implements UserService{
 		}
 
 		@Override
-		public List<Route> getRouteByDate(LocalDateTime doj) throws RouteException {
-		
-		         int flag = 0;	
-		 	 List<Route> routes = routeDao.getByDate(doj);
-			 
-			 for(Route route: routes) {
-				 
-				 if(route.getDoj().equals(doj)){
-					 flag = 1;
+		public List<Package> getPackageByDate(LocalDate doj) throws PackageException {
+			 int flag = 0;
+		 	 List<Package> packages = packageDao.findAll();
+			  List<Package> newPackage = packageDao.findAll();
+			 for(Package pack: packages) {
+				 LocalDate localDate = pack.getRoute().getDepartureTime().toLocalDate();
+				 if (localDate.equals(doj)) {
+					 newPackage.add(pack);
 				 }
-				 
 			 }
-			
-			if(flag == 1) {
-				return routes;
+			if(newPackage.isEmpty()){
+				throw new PackageException("Package doesn't exist on this date : "+doj);
 			}
 			else {
-				throw new RouteException("Roye Doesn't Exsit On This Date :"+doj);
+				return newPackage;
 			}
-			
-			
 		}
 
 		@Override

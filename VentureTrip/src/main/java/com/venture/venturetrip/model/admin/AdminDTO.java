@@ -1,54 +1,29 @@
 package com.venture.venturetrip.model.admin;
 
 
-//import lombok.*;
-//
-//import javax.persistence.Entity;
-//import javax.validation.constraints.NotNull;
-//
-//
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Getter
-//@Setter
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class AdminDTO {
+    @Pattern(regexp="(^$|[0-9]{10})",message = "Phone number should be 10 digits")
     private String mobile;
+
+    @NotNull
+    @Size(min = 2, max = 30,message = "Password should contains alphabet,numeric ,special characters ans it has also minimum 4 to 12 characters")
     private String password;
     
     
-    public AdminDTO() {
-		// TODO Auto-generated constructor stub
-	}
 
-
-	public AdminDTO(String mobile, String password) {
-		super();
-		this.mobile = mobile;
-		this.password = password;
-	}
-
-
-	public String getMobile() {
-		return mobile;
-	}
-
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-    
-    
     
     
 }

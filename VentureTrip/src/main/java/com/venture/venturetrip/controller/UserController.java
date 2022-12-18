@@ -1,5 +1,6 @@
 package com.venture.venturetrip.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -243,49 +244,60 @@ public class UserController {
     
     
     @GetMapping("/routeByLocation")
-    public ResponseEntity<List<Route>> getAllRouteHandler(@RequestParam("from") String from){
-    	
-    	List<Route> routes = cService.GetRouteFrom(from);
-    	
-    	return new ResponseEntity<>(routes,HttpStatus.OK);
+    public ResponseEntity<Object> getAllRouteHandler(@RequestParam("from") String from){
+    	if(isLogin){
+			List<Route> routes = cService.GetRouteFrom(from);
+			return new ResponseEntity<>(routes,HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>("Please , Login Fist ! ",HttpStatus.OK);
+		}
+
+
     }
 	
-    @GetMapping("/routeByDate")
-    public ResponseEntity<List<Route>> getRouteByDAteHandler(@RequestParam("doj") LocalDateTime doj){
-    	
-    	List<Route> routes = cService.getRouteByDate(doj);
-    	
-    	return new ResponseEntity<>(routes,HttpStatus.OK);
+    @GetMapping("/packageByDate")
+    public ResponseEntity<Object> getPackageByDAteHandler(@RequestParam("doj") LocalDate doj){
+		if(isLogin){
+			List<Package> packages = cService.getPackageByDate(doj);
+			return new ResponseEntity<>(packages,HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>("Please , Login Fist ! ",HttpStatus.OK);
+		}
     }
     
     
     @GetMapping("/hotels/{Id}")
 	public ResponseEntity<Object> getHotelbyId(@PathVariable("Id") Integer hotelID){
 		if(isLogin) {
-		 Hotel hotel = cService.findByHotelId(hotelID);
-		
-		return new  ResponseEntity<Object> (hotel, HttpStatus.OK);
-	}else {
-		
-	    return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		 	Hotel hotel = cService.findByHotelId(hotelID);
+			return new  ResponseEntity<Object> (hotel, HttpStatus.OK);
+		}else {
+	    	return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
 		}
 	}
     
 
     @GetMapping("/hotelByName")
-    public ResponseEntity<List<Hotel>> getHotelByNameHandler(@RequestParam("name") String name){
-    	
-              List<Hotel> ht = cService.getHotelByName(name);
-    	
-    	return new ResponseEntity<>(ht,HttpStatus.OK);
+    public ResponseEntity<Object> getHotelByNameHandler(@RequestParam("name") String name){
+
+		if(isLogin){
+			List<Hotel> ht = cService.getHotelByName(name);
+			return new ResponseEntity<>(ht,HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
+
     }
     
     @GetMapping("/hotelByRent")
-    public ResponseEntity<List<Hotel>> getHotelByRentHandler(@RequestParam("rent") String rent){
-    	
-             List<Hotel> ht = cService.getHotelByRent(rent);
-    	
-    	return new ResponseEntity<>(ht,HttpStatus.OK);
+    public ResponseEntity<Object> getHotelByRentHandler(@RequestParam("rent") String rent){
+
+		if(isLogin){
+			List<Hotel> ht = cService.getHotelByRent(rent);
+			return new ResponseEntity<>(ht,HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
+		}
     }
 	
 

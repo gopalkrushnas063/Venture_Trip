@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Size;
+
 
 @Data
 @Setter
@@ -17,6 +19,7 @@ import lombok.Setter;
 public class Ticket {
    
     private Integer ticketID;
+
     private String name;
     private String address;
     private String mobileNo;

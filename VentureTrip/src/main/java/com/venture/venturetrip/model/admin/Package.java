@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ManyToAny;
 
@@ -28,8 +30,12 @@ public class Package {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer packageID;
+
+    @Size(min = 1, message = "package name cannot be null")
     private String packageName;
     private String description;
+
+    @Min(value = 1000,message = "Package cost can't be less than ₹1000/-")
     private Integer packageCost;
     
     @JsonIgnore

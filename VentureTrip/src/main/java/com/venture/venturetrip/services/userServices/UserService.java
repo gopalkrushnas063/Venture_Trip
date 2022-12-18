@@ -1,5 +1,6 @@
 package com.venture.venturetrip.services.userServices;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +65,7 @@ public interface UserService {
 	
 	public List<Route> GetRouteFrom(String from)throws RouteException;
 	
-	public List<Route> getRouteByDate(LocalDateTime doj)throws RouteException;
+	public List<Package> getPackageByDate(LocalDate doj)throws PackageException;
 	
 	public List<Hotel> getHotelByName(String name)throws HotelException; 
 	
