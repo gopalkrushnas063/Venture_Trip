@@ -1,5 +1,6 @@
 package com.venture.venturetrip.services.userServices;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -10,10 +11,14 @@ import org.springframework.stereotype.Service;
 import com.venture.venturetrip.exception.BookingException;
 import com.venture.venturetrip.exception.CustomerException;
 import com.venture.venturetrip.exception.FeedbackException;
+import com.venture.venturetrip.exception.HotelException;
 import com.venture.venturetrip.exception.PackageException;
+import com.venture.venturetrip.exception.RouteException;
 import com.venture.venturetrip.exception.TicketException;
 import com.venture.venturetrip.exception.TravelsException;
+import com.venture.venturetrip.model.admin.Hotel;
 import com.venture.venturetrip.model.admin.Package;
+import com.venture.venturetrip.model.admin.Route;
 import com.venture.venturetrip.model.admin.Travels;
 import com.venture.venturetrip.model.user.Booking;
 import com.venture.venturetrip.model.user.CurrentUserSession;
@@ -23,7 +28,9 @@ import com.venture.venturetrip.model.user.Ticket;
 import com.venture.venturetrip.repository.BookingDao;
 import com.venture.venturetrip.repository.CustomerDao;
 import com.venture.venturetrip.repository.FeedBackDao;
+import com.venture.venturetrip.repository.HotelDao;
 import com.venture.venturetrip.repository.PackageDao;
+import com.venture.venturetrip.repository.RouteDao;
 import com.venture.venturetrip.repository.SessionDao;
 import com.venture.venturetrip.repository.TravelsDao;
 
@@ -35,7 +42,11 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private TravelsDao tDao;
 	
+	@Autowired
+	private RouteDao routeDao;
 	
+	@Autowired
+	private HotelDao hDao;
 	
 	@Autowired
 	  private FeedBackDao fDao;
@@ -214,7 +225,7 @@ public class UserServiceImpl implements UserService{
 		 Optional<Package> pack = packageDao.findById(booking.getPackageID());
 		 
 		 if(pack.isPresent()) {
-			 if(booking.getAmount() == pack.get().getPackageCost()) {
+			 if(booking.getAmount().equals(pack.get().getPackageCost())) {
 				 
 				 Integer bookingID = new Random().nextInt(999999);
 				 booking.setBookingID(bookingID);
@@ -294,7 +305,136 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
-	
+	   @Override
+		public List<Route> getAllRoute() throws RouteException {
+			
+			List<Route> list = routeDao.findAll();
+			
+			if(list == null) {
+				throw new RouteException("Route Data Doesn't Exist");
+			}
+			else {
+				return list;
+			}
+			
+			
+		}
+
+		@Override
+		public List<Route> GetRouteFrom(String from) throws RouteException {
+			 
+			List<Route> listFrom = routeDao.getRouteFrom(from);
+			
+			for(Route route: listFrom) {
+				
+				if(route.getRouteFrom().equalsIgnoreCase(from)) {
+					
+					
+					return listFrom;
+					
+				}
+				else {
+					
+					throw new RouteException("No Route Found From :"+ from);
+				}
+				
+			}
+			
+			return null;
+		}
+
+		@Override
+		public List<Hotel> getHotelByName(String name) throws HotelException {
+			
+			int flag = 0;
+			List<Hotel> opt = hDao.getHotelByName(name);
+			
+		    for(Hotel hotel: opt) {
+		    	
+		    	if(hotel.getHotelName().equalsIgnoreCase(name)) {
+		    		flag = 1;  
+		    	}
+		    
+		    		
+		    }
+		    	if(flag == 1) {
+		    		return opt;
+		    	}
+				else {
+		          
+		    		throw new HotelException("Hotel Doesn't Exist With This Name :"+name);
+		    		
+		    	}
+		}
+
+		@Override
+		public List<Hotel> getHotelByRent(String rent) throws HotelException {
+			
+			
+			int flag = 0;
+			List<Hotel> hotels = hDao.findByCost(rent);
+			
+			
+			for(Hotel hotel:hotels) {
+				
+				if(hotel.getRent().equalsIgnoreCase(rent)) {
+					
+					flag = 1;
+				}
+			
+			}
+			if(flag==1) {
+				return hotels;
+			}
+				else {
+				throw new HotelException("Hotel Not Found In This Budget :"+rent);
+			}
+			
+		}
+
+		@Override
+		public List<Route> getRouteByDate(LocalDateTime doj) throws RouteException {
+		
+		         int flag = 0;	
+		 	 List<Route> routes = routeDao.getByDate(doj);
+			 
+			 for(Route route: routes) {
+				 
+				 if(route.getDoj().equals(doj)){
+					 flag = 1;
+				 }
+				 
+			 }
+			
+			if(flag == 1) {
+				return routes;
+			}
+			else {
+				throw new RouteException("Roye Doesn't Exsit On This Date :"+doj);
+			}
+			
+			
+		}
+
+		@Override
+		public Hotel findByHotelId(Integer hotelId) throws HotelException {
+			
+			Optional<Hotel> hotel = hDao.findById(hotelId);
+			
+			if(hotel.isEmpty()) {
+				throw new HotelException("Hotel Doesn't Find By This Id :"+ hotelId);
+			}
+			
+			else {
+				
+				 return hotel.get();
+				
+			}
+				
+			
+			
+		}
+
 
 	
 	

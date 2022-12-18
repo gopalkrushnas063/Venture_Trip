@@ -1,16 +1,20 @@
 package com.venture.venturetrip.services.userServices;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import com.venture.venturetrip.exception.BookingException;
 import com.venture.venturetrip.exception.CustomerException;
 import com.venture.venturetrip.exception.FeedbackException;
 import com.venture.venturetrip.exception.HotelException;
 import com.venture.venturetrip.exception.PackageException;
+import com.venture.venturetrip.exception.RouteException;
 import com.venture.venturetrip.exception.TicketException;
 import com.venture.venturetrip.exception.TravelsException;
 import com.venture.venturetrip.model.admin.Hotel;
 import com.venture.venturetrip.model.admin.Package;
+import com.venture.venturetrip.model.admin.Route;
 import com.venture.venturetrip.model.admin.Travels;
 import com.venture.venturetrip.model.user.Booking;
 import com.venture.venturetrip.model.user.Customer;
@@ -54,9 +58,18 @@ public interface UserService {
 	
 	public Booking cancelBooking(Integer bookingId)throws BookingException;
 	
-	//public Hotel findByHotelId(Integer hotelId) throws HotelException;
+	public  Hotel findByHotelId(Integer hotelId) throws HotelException;
 	
+    public List<Route> getAllRoute()throws RouteException;
 	
+	public List<Route> GetRouteFrom(String from)throws RouteException;
+	
+	public List<Route> getRouteByDate(LocalDateTime doj)throws RouteException;
+	
+	public List<Hotel> getHotelByName(String name)throws HotelException; 
+	
+	public List<Hotel> getHotelByRent(String rent)throws HotelException;
+
 	
 	
 	
