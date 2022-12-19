@@ -81,24 +81,70 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/103574856/208439456-7afc0143-ac45-48d9-84aa-cb49db09d717.png"/></p>
 
 <h3>Admin Table : </h3>
-<table align="center">
-<tbody>
-<tr align="top">
-<td width="50%" align="center">
 
+<!DOCTYPE html>
+<html>
 
-| Field | Type | Null | Key | Default | Extra |
-| --- | --- | --- | --- | --- | --- |
-| Admin_Name | VARCHAR(20) | YES |   | null |
-| AdminID | varchar(255) | YES |  | null |
-| Email | varchar(255) | YES |  | null |
-| Mobile  | varchar(255) | YES |  | null |
-| Password  | varchar(30) | NO |  | null |
-| Architecture  | varchar(255) | YES |  | null |
-
-
-</td>
+<body align="center">
+<table border="1" style="border-collapse:collapse">
+<tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Null</th>
+  <th>Key</th>
+  <th>Default</th>
+  <th>Extra</th>
 </tr>
-</tbody>
+<tr>
+  <td>adminid</td>
+  <td>int</td>
+  <td>NO</td>
+  <td>PRI</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>admin_name</td>
+  <td>varchar(20)</td>
+  <td>YES</td>
+  <td></td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>email</td>
+  <td>varchar(255)</td>
+  <td>YES</td>
+  <td></td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>mobile</td>
+  <td>varchar(255)</td>
+  <td>YES</td>
+  <td></td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>password</td>
+  <td>varchar(12)</td>
+  <td>YES</td>
+  <td></td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>user_type</td>
+  <td>varchar(255)</td>
+  <td>YES</td>
+  <td></td>
+  <td>null</td>
+  <td></td>
+</tr>
 </table>
+</body>
+</html>
+
 
