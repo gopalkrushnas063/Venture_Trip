@@ -78,7 +78,7 @@
 <hr>
 
 <h3 align="center">MySQL Schema Database Structure</h3>
-<p align="center"><img src="https://user-images.githubusercontent.com/103574856/208312888-183662ec-d1d3-41c7-b483-6a8f7eed1111.png"/></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/103574856/208438779-12e62114-77b0-4dbe-b6e1-98820e9873fb.png"/></p>
 
 <h3>Admin Table : </h3>
 <table align="center">
