@@ -138,7 +138,7 @@
 <td width="25%" align="center">
 <p dir="auto"><span>Admin Developer</span><br><br></p>
 <a><img src="https://user-images.githubusercontent.com/103574856/208824189-665b0e8a-d4bf-4b95-97da-4ca4413beb69.png" height="100"></a>
-<p dir="auto"><span>Gopal Krushna Sahoo</span><br></p>
+<p dir="auto"><span>Gopal Krshna Sahoo</span><br></p>
 </td>
 
 <td width="25%" align="center">
