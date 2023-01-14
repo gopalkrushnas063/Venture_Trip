@@ -115,8 +115,7 @@
     
    <h3 id="installation-run">Installation &amp; Run</h3>
     <ul>
-        <li>Before running the API server, you should update the database config inside the <a
-                href="https://github.com/mrFarooque/rightful-order-9279/blob/main/TripManagementSystem/src/main/resources/application.properties">application.properties</a>
+        <li>Before running the API server, you should update the database config inside the <a>application.properties</a>
             file.</li>
         <li>Update the port number, username and password as per your local database config.</li>
     </ul>
