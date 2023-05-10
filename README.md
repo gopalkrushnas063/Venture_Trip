@@ -5,7 +5,7 @@
 
 
 
-<h3>Admin module :</h3>
+<h3>Admin Module :</h3>
 <li>Admin can manage the user ,traveller,hotel and receive package from traveller & package management</li>
 <li align="justify">This module provides administrator related functionality. Administrator manages all information and has access rights to add, delete, edit and view the data related to hotels, travels, routes, bookings, etc.</li>
 <h3>User module :</h3>
