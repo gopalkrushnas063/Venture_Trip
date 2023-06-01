@@ -9,8 +9,8 @@
 <li>Admin can manage the user ,traveller,hotel and receive package from traveller & package management</li>
 <li align="justify">This module provides administrator related functionality. Administrator manages all information and has access rights to add, delete, edit and view the data related to hotels, travels, routes, bookings, etc.</li>
 <h3>User module :</h3>
-<li>User can view route,package,give feedback and also booking package.</li>
-<li>This module helps to customer.</li>
+<li>The User Module caters to the needs of customers, providing them with a seamless experience. Users can effortlessly browse through available routes, explore packages, offer valuable feedback, and conveniently book their preferred packages.</li>
+<li>This module is designed to enhance customer satisfaction and streamline the overall user experience, making it easier for customers to interact with the system and access the services they require.</li>
 
 <hr>
 
