@@ -56,7 +56,7 @@
 <tr valign="top">
 <td width="15%" align="center">
 <p dir="auto"><span>𝗦𝗽𝗿𝗶𝗻𝗴 𝗕𝗼𝗼𝘁</span><br><br></p>
-<a><img src="https://user-images.githubusercontent.com/103574856/220042941-fba009d3-2daa-4529-b89b-420056924a17.png" height="40"></a>
+<a><img src="https://user-images.githubusercontent.com/103574856/220042941-fba009d3-2daa-4529-b89b-420056924a17.png" height="80" width="80"></a>
 </td>
 <td width="15%" align="center">
 <p dir="auto"><span>𝐌𝐚𝐯𝐞𝐧</span><br><br></p>
