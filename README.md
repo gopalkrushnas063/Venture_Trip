@@ -38,7 +38,7 @@
 <tr valign="top">
 <td width="15%" align="center">
 <p dir="auto"><span>𝗦𝗽𝗿𝗶𝗻𝗴 𝗧𝗼𝗼𝗹 𝗦𝘂𝗶𝘁</span><br><br></p>
-<a><img src="https://spring.io/images/logo-spring-tools-gear-3dbfa4e3714afa9d58885422ec7ac8e5.svg" height="40"></a>
+<a><img src="https://user-images.githubusercontent.com/103574856/220043688-f6ef29ce-d1db-42c6-9851-383075f93a29.png" height="40"></a>
 <td width="15%" align="center">
 <p dir="auto"><span>𝗜𝗻𝘁𝗲𝗹𝗹𝗶𝗝 𝗜𝗗𝗘𝗔</span><br><br></p>
 <a><img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/IntelliJ_IDEA_Icon.svg" height = "40"></a>
@@ -56,7 +56,7 @@
 <tr valign="top">
 <td width="15%" align="center">
 <p dir="auto"><span>𝗦𝗽𝗿𝗶𝗻𝗴 𝗕𝗼𝗼𝘁</span><br><br></p>
-<a><img src="https://spring.io/images/projects/spring-edf462fec682b9d48cf628eaf9e19521.svg" height="40"></a>
+<a><img src="https://user-images.githubusercontent.com/103574856/220042941-fba009d3-2daa-4529-b89b-420056924a17.png" height="40"></a>
 </td>
 <td width="15%" align="center">
 <p dir="auto"><span>𝐌𝐚𝐯𝐞𝐧</span><br><br></p>
