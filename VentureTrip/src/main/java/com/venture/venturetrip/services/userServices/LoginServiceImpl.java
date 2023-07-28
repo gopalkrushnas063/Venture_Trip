@@ -16,55 +16,43 @@ import com.venture.venturetrip.repository.SessionDao;
 import net.bytebuddy.utility.RandomString;
 
 @Service
-public class LoginServiceImpl implements LoginService{
+public class LoginServiceImpl implements LoginService {
 
-	@Autowired
-	private CustomerDao cDao;
-	
-	@Autowired
-	private SessionDao sDao;
-	
-	
-	
-	@Override
-	public String logIntoAccount(LoginDTO dto)throws LoginException{
-		Customer existingCustomer= cDao.findByEmail(dto.getEmail());
-		if(existingCustomer == null) {
-			throw new LoginException("Please Enter a valid email or password");
-		}
-		Optional<CurrentUserSession> validCustomerSessionOpt =  sDao.findById(existingCustomer.getCustomerID());
-		if(validCustomerSessionOpt.isPresent()) {
-			throw new LoginException("User already Logged In with this number");
-		}
-		if(existingCustomer.getCustomerPassword().equals(dto.getPassword())) {
-			String key= RandomString.make(6);
-			CurrentUserSession currentUserSession = new CurrentUserSession(existingCustomer.getCustomerID(),key,LocalDateTime.now());
-			sDao.save(currentUserSession);
-			return currentUserSession.toString();
-		}
-		else
-			throw new LoginException("Please Enter a valid password");
-	}
+    @Autowired
+    private CustomerDao cDao;
+
+    @Autowired
+    private SessionDao sDao;
 
 
-	@Override
-	public String logOutFromAccount(String key)throws LoginException {
-		
-		CurrentUserSession validCustomerSession = sDao.findByUuid(key);
-		
-		
-		if(validCustomerSession == null) {
-			throw new LoginException("User Not Logged In with this number");
-			
-		}
-		
-		
-		sDao.delete(validCustomerSession);
-		
-		
-		return "Logged Out !";
-		
-		
-	}
+    @Override
+    public String logIntoAccount(LoginDTO dto) throws LoginException {
+        Customer existingCustomer = cDao.findByEmail(dto.getEmail());
+        if (existingCustomer == null) {
+            throw new LoginException("Please Enter a valid email or password");
+        }
+        Optional<CurrentUserSession> validCustomerSessionOpt = sDao.findById(existingCustomer.getCustomerID());
+        if (validCustomerSessionOpt.isPresent()) {
+            throw new LoginException("User already Logged In with this number");
+        }
+        if (existingCustomer.getCustomerPassword().equals(dto.getPassword())) {
+            String key = RandomString.make(6);
+            CurrentUserSession currentUserSession = new CurrentUserSession(existingCustomer.getCustomerID(), key, LocalDateTime.now());
+            sDao.save(currentUserSession);
+            return currentUserSession.toString();
+        } else
+            throw new LoginException("Please Enter a valid password");
+    }
+
+
+    @Override
+    public String logOutFromAccount(String key) throws LoginException {
+        CurrentUserSession validCustomerSession = sDao.findByUuid(key);
+        if (validCustomerSession == null) {
+            throw new LoginException("User Not Logged In with this number");
+        }
+        sDao.delete(validCustomerSession);
+        return "Logged Out !";
+    }
 
 }

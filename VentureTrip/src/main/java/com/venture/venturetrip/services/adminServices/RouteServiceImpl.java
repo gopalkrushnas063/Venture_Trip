@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RouteServiceImpl implements RouteServices{
+public class RouteServiceImpl implements RouteServices {
 
     @Autowired
     private RouteDao routeDao;
@@ -32,28 +32,28 @@ public class RouteServiceImpl implements RouteServices{
     @Override
     public Route addRoute(Route route) throws VehiclesException {
 
-        Optional<Travels> opt =  travelsDao.findById(route.getTravelsID());
-        if(opt.isPresent()){
+        Optional<Travels> opt = travelsDao.findById(route.getTravelsID());
+        if (opt.isPresent()) {
             Travels existingTravel = opt.get();
-//            existingTravel.getRoutes().add(route);
+            //existingTravel.getRoutes().add(route);
             return routeDao.save(route);
-        }else{
-            throw new VehiclesException("Vehicle does not exist with vehicle number : "+route.getTravelsID());
+        } else {
+            throw new VehiclesException("Vehicle does not exist with vehicle number : " + route.getTravelsID());
         }
 
 
     }
 
     @Override
-    public Route updateRoute(Route route) throws RouteException,VehiclesException {
+    public Route updateRoute(Route route) throws RouteException, VehiclesException {
         Optional<Route> opt = routeDao.findById(route.getRouteID());
-        if(opt.isPresent()){
+        if (opt.isPresent()) {
             Optional<Travels> opt1 = travelsDao.findById(route.getTravelsID());
 
-            if(opt1.isPresent()){
+            if (opt1.isPresent()) {
                 List<Route> routes = opt1.get().getRoutes();
-                for(Route route1 : routes){
-                    if(route1.getRouteID() == route.getRouteID()){
+                for (Route route1 : routes) {
+                    if (route1.getRouteID() == route.getRouteID()) {
                         route1.setRouteFrom(route.getRouteFrom());
                         route1.setRouteTo(route.getRouteTo());
                         route1.setDepartureTime(route.getDepartureTime());
@@ -64,22 +64,22 @@ public class RouteServiceImpl implements RouteServices{
                     }
                 }
                 return routeDao.save(route);
-            }else {
-                throw new TravelsException("Traveller does not exist with the given travelID : "+route.getTravelsID());
+            } else {
+                throw new TravelsException("Traveller does not exist with the given travelID : " + route.getTravelsID());
             }
-        }else{
-            throw new RouteException("Route does not exist with routeID : "+route.getRouteID());
+        } else {
+            throw new RouteException("Route does not exist with routeID : " + route.getRouteID());
         }
     }
 
     @Override
     public Route deleteRoute(Integer routeID) throws RouteException {
         Optional<Route> opt = routeDao.findById(routeID);
-        if(opt.isPresent()){
+        if (opt.isPresent()) {
             routeDao.deleteById(routeID);
             return opt.get();
-        }else{
-            throw new RouteException("Route does not exist with route ID : "+routeID);
+        } else {
+            throw new RouteException("Route does not exist with route ID : " + routeID);
         }
 
     }

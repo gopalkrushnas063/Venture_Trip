@@ -8,5 +8,4 @@ public interface RouteServices {
     public Route addRoute(Route route) throws RouteException;
     public Route updateRoute(Route route) throws RouteException, VehiclesException;
     public Route deleteRoute(Integer routeID) throws RouteException;
-
 }

@@ -27,23 +27,18 @@ import com.venture.venturetrip.services.adminServices.AdminService;
 import com.venture.venturetrip.services.userServices.LoginService;
 import com.venture.venturetrip.services.userServices.UserService;
 
+
 @RestController
 @RequestMapping("/login")
 public class LoginController {
-
     @Autowired
     private AdminLoginServiceImpl adminLogInServiceImpl;
-
     @Autowired
     private UserService cService;
-    
     @Autowired
-	private LoginService customerLogin;
-
+    private LoginService customerLogin;
     @Autowired
     private AdminService adminService;
-    
-
 
 
     @CrossOrigin
@@ -56,55 +51,47 @@ public class LoginController {
     @CrossOrigin
     @PostMapping("/adminlogin")
     public ResponseEntity<CurrentAdminSession> logInAdmin(@RequestBody AdminDTO adminDTO) throws LoginException {
-    	CurrentAdminSession cas = adminLogInServiceImpl.logIntoAccount(adminDTO);
-    	if(cas != null) {
-    		AdminController.isLogin = true;
-    	}
+        CurrentAdminSession cas = adminLogInServiceImpl.logIntoAccount(adminDTO);
+        if (cas != null) {
+            AdminController.isLogin = true;
+        }
         return new ResponseEntity<CurrentAdminSession>(cas, HttpStatus.OK);
     }
 
     // for admin logout
     @CrossOrigin
     @PatchMapping("/adminlogout")
-    public ResponseEntity<String> logOutAdmin(@RequestParam(required = false) String key) throws LoginException{
-    	String cas = adminLogInServiceImpl.logOutAccount(key);
-    	if(cas != null) {
-    		AdminController.isLogin = false;
-    	}
+    public ResponseEntity<String> logOutAdmin(@RequestParam(required = false) String key) throws LoginException {
+        String cas = adminLogInServiceImpl.logOutAccount(key);
+        if (cas != null) {
+            AdminController.isLogin = false;
+        }
         return new ResponseEntity<String>(cas, HttpStatus.OK);
     }
 
 
     @PostMapping("/registerCustomer")
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws CustomerException {
-       
-        	  Customer c = cService.regCustomer(customer);
-
-              return new ResponseEntity<Customer>(c, HttpStatus.OK);	
-      
+        Customer c = cService.regCustomer(customer);
+        return new ResponseEntity<Customer>(c, HttpStatus.OK);
     }
-    
-	@PostMapping("/customerlogin")
-	public ResponseEntity<String> logInCustomer(@RequestBody LoginDTO dto) throws LoginException {
-	
-			String result = customerLogin.logIntoAccount(dto);
-			if(result != null) {
-	    		UserController.isLogin = true;
-	    	}
 
-			return new ResponseEntity<String>(result,HttpStatus.OK );	
-	
-	}
-	
-	@PatchMapping("/customerlogout")
-	public String logoutCustomer(@RequestParam(required = false) String key) throws LoginException {
-		String result = customerLogin.logOutFromAccount(key);
-		if(result != null) {
-    		UserController.isLogin = false;
-    	}
-		return result;
-		
-	}
-	
+    @PostMapping("/customerlogin")
+    public ResponseEntity<String> logInCustomer(@RequestBody LoginDTO dto) throws LoginException {
 
+        String result = customerLogin.logIntoAccount(dto);
+        if (result != null) {
+            UserController.isLogin = true;
+        }
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+    @PatchMapping("/customerlogout")
+    public String logoutCustomer(@RequestParam(required = false) String key) throws LoginException {
+        String result = customerLogin.logOutFromAccount(key);
+        if (result != null) {
+            UserController.isLogin = false;
+        }
+        return result;
+    }
 }

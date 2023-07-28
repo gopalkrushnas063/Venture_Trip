@@ -23,55 +23,26 @@ import com.venture.venturetrip.model.user.FeedBack;
 import com.venture.venturetrip.model.user.Ticket;
 
 
-
-
 public interface UserService {
-	
-	
-	public Customer regCustomer(Customer customer) throws CustomerException;
-	
-	public Customer getCustomerBiID(Integer c_id) throws CustomerException;
-	
-	public List<Customer> getallCustomer() throws CustomerException;
-	
-	public List<Travels> getallTravels() throws TravelsException;
-	
-	public Travels getTravelById(Integer t_id) throws TravelsException;
-	
+    public Customer regCustomer(Customer customer) throws CustomerException;
+    public Customer getCustomerBiID(Integer c_id) throws CustomerException;
+    public List<Customer> getallCustomer() throws CustomerException;
+    public List<Travels> getallTravels() throws TravelsException;
+    public Travels getTravelById(Integer t_id) throws TravelsException;
     public Ticket getTicketByBookingId(Integer bookingID) throws TicketException;
-	
     public FeedBack addFeedback(FeedBack feedback) throws FeedbackException;
-	
-	public FeedBack viewFeedBack(Integer feedbackID) throws FeedbackException;
-	
-	public FeedBack updateFeedBack(FeedBack feedback) throws FeedbackException;
-	
-	public FeedBack deleteFeedBack(FeedBack feedback) throws FeedbackException;
-	
-	public String bookNewTicket(Booking booking) throws BookingException;
-	
-	public Customer updateCustomer(Customer customer,String key)throws CustomerException;
-	
-    public List<Package> getPacakge()throws PackageException;
-	
-	public Package getPacakgebyId(Integer packId)throws PackageException;
-	
-	
-	public Booking cancelBooking(Integer bookingId)throws BookingException;
-	
-	public  Hotel findByHotelId(Integer hotelId) throws HotelException;
-	
-    public List<Route> getAllRoute()throws RouteException;
-	
-	public List<Route> GetRouteFrom(String from)throws RouteException;
-	
-	public List<Package> getPackageByDate(LocalDate doj)throws PackageException;
-	
-	public List<Hotel> getHotelByName(String name)throws HotelException; 
-	
-	public List<Hotel> getHotelByRent(String rent)throws HotelException;
-
-	
-	
-	
+    public FeedBack viewFeedBack(Integer feedbackID) throws FeedbackException;
+    public FeedBack updateFeedBack(FeedBack feedback) throws FeedbackException;
+    public FeedBack deleteFeedBack(FeedBack feedback) throws FeedbackException;
+    public String bookNewTicket(Booking booking) throws BookingException;
+    public Customer updateCustomer(Customer customer, String key) throws CustomerException;
+    public List<Package> getPacakge() throws PackageException;
+    public Package getPacakgebyId(Integer packId) throws PackageException;
+    public Booking cancelBooking(Integer bookingId) throws BookingException;
+    public Hotel findByHotelId(Integer hotelId) throws HotelException;
+    public List<Route> getAllRoute() throws RouteException;
+    public List<Route> GetRouteFrom(String from) throws RouteException;
+    public List<Package> getPackageByDate(LocalDate doj) throws PackageException;
+    public List<Hotel> getHotelByName(String name) throws HotelException;
+    public List<Hotel> getHotelByRent(String rent) throws HotelException;
 }
